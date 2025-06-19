@@ -1,0 +1,24 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import Navbar from '@/components/Navbar';
+import Sidebar from '@/components/Sidebar';
+import Hero from '@/components/Hero';
+import FeatureCards from '@/components/FeatureCards';
+import ChatSection from '@/components/ChatSection';
+import StatsSection from '@/components/StatsSection';
+import Hotel from '@/components/Hotel/Hotel';
+import Destination from '@/components/Destination/Destination';
+
+export default function Home() {
+  return (
+    <main className="min-h-screen bg-white">
+      <Hero />
+      <Destination />
+      {/* <Hotel /> */}
+      <FeatureCards />
+      <ChatSection />
+      <StatsSection />
+    </main>
+  );
+}
