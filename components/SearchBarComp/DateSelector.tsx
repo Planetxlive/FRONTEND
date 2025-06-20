@@ -1,16 +1,16 @@
 'use client';
 
-import React from "react";
-import { format } from "date-fns";
-import { Calendar as CalendarIcon } from "lucide-react";
-import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+import React from 'react';
+import { format } from 'date-fns';
+import { Calendar as CalendarIcon } from 'lucide-react';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from '@/components/ui/popover';
 
 interface DateSelectorProps {
   date: Date | undefined;
@@ -31,12 +31,12 @@ const DateSelector: React.FC<DateSelectorProps> = ({
         <Button
           variant="outline"
           className={cn(
-            "w-full h-12 justify-start text-left font-normal border-gray-300 hover:border-blue-500",
-            !date && "text-muted-foreground"
+            'w-full h-12 justify-start text-left font-normal border-gray-300 hover:border-blue-500',
+            !date && 'text-muted-foreground'
           )}
         >
           <CalendarIcon className="mr-3 h-4 w-4 text-gray-400" />
-          {date ? format(date, "MMM dd, yyyy") : <span>{placeholder}</span>}
+          {date ? format(date, 'MMM dd, yyyy') : <span>{placeholder}</span>}
         </Button>
       </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
@@ -44,7 +44,7 @@ const DateSelector: React.FC<DateSelectorProps> = ({
           mode="single"
           selected={date}
           onSelect={onDateChange}
-          disabled={(current) =>
+          disabled={current =>
             minDate ? current < minDate : current < new Date()
           }
           initialFocus

@@ -1,4 +1,4 @@
-import { useClerk } from "@clerk/clerk-react";
+import { useClerk } from '@clerk/clerk-react';
 
 export default function useSignOut() {
   const { signOut } = useClerk();

@@ -83,7 +83,8 @@
 
 /* Custom Animations */
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px) rotate(var(--rotate, 0deg));
   }
   50% {
@@ -92,7 +93,8 @@
 }
 
 @keyframes float-delayed {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0px) rotate(var(--rotate, 0deg));
   }
   50% {
@@ -200,7 +202,7 @@ html {
   .mobile-padding {
     @apply px-4 py-6;
   }
-  
+
   .mobile-text {
     @apply text-sm;
   }
@@ -219,7 +221,7 @@ html {
   .animate-float-delayed {
     animation: none;
   }
-  
+
   * {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;

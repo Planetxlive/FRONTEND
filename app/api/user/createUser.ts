@@ -1,6 +1,6 @@
-import { User } from "@/app/store/features/user/types";
-import config from "@/lib/config";
-import axios from "axios";
+import { User } from '@/app/store/features/user/types';
+import config from '@/lib/config';
+import axios from 'axios';
 
 export default async function createUser(
   sessionToken: string,
@@ -12,6 +12,6 @@ export default async function createUser(
       Authorization: `Bearer ${sessionToken}`,
     },
   });
-  console.log(res)
+  console.log(res);
   return res.data.user;
 }

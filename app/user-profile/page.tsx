@@ -1,5 +1,5 @@
-"use client";
-import React, { useState } from "react";
+'use client';
+import React, { useState } from 'react';
 import {
   User as UserIcon,
   MapPin,
@@ -9,10 +9,10 @@ import {
   Save,
   X,
   Camera,
-} from "lucide-react";
-import { User } from "../store/features/user/types";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+} from 'lucide-react';
+import { User } from '../store/features/user/types';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
 const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
@@ -67,8 +67,8 @@ const UserProfile = () => {
             backgroundImage: user?.coverURL
               ? `url(${user?.coverURL})`
               : undefined,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
           }}
         >
           {isEditing && (
@@ -142,7 +142,7 @@ const UserProfile = () => {
                   />
                 ) : (
                   <h1 className="text-3xl font-bold text-gray-900">
-                    {user?.name || "Anonymous User"}
+                    {user?.name || 'Anonymous User'}
                   </h1>
                 )}
               </div>
@@ -202,7 +202,7 @@ const UserProfile = () => {
                 />
               ) : (
                 <p className="text-gray-900 p-3 bg-gray-50 rounded-lg">
-                  {user?.mobile || "Not provided"}
+                  {user?.mobile || 'Not provided'}
                 </p>
               )}
             </div>
@@ -224,7 +224,7 @@ const UserProfile = () => {
                 />
               ) : (
                 <p className="text-gray-900 p-3 bg-gray-50 rounded-lg">
-                  {user?.whatsappMobile || "Not provided"}
+                  {user?.whatsappMobile || 'Not provided'}
                 </p>
               )}
             </div>
@@ -255,7 +255,7 @@ const UserProfile = () => {
                 />
               ) : (
                 <p className="text-gray-900 p-3 bg-gray-50 rounded-lg">
-                  {user?.state || "Not provided"}
+                  {user?.state || 'Not provided'}
                 </p>
               )}
             </div>
@@ -276,7 +276,7 @@ const UserProfile = () => {
                 />
               ) : (
                 <p className="text-gray-900 p-3 bg-gray-50 rounded-lg">
-                  {user?.city || "Not provided"}
+                  {user?.city || 'Not provided'}
                 </p>
               )}
             </div>
@@ -284,7 +284,7 @@ const UserProfile = () => {
             {user?.latitude && user?.longitude && (
               <div className="mt-4 p-3 bg-blue-50 rounded-lg">
                 <p className="text-sm text-blue-700">
-                  <strong>Coordinates:</strong> {user?.latitude},{" "}
+                  <strong>Coordinates:</strong> {user?.latitude},{' '}
                   {user?.longitude}
                 </p>
               </div>
