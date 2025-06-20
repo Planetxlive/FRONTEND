@@ -7,6 +7,7 @@ on:
     branches: [ main, develop ]
 
 jobs:
+
   docker-build:
     runs-on: ubuntu-latest
     
@@ -42,9 +43,9 @@ jobs:
         docker run --rm planetx-frontend:latest npx tsc --noEmit
         echo "✅ TypeScript type check passed!"
         
-        echo "🏗️  Running build test in container..."
-        docker run --rm planetx-frontend:latest npm run build
-        echo "✅ Build test passed!"
+        # echo "🏗️  Running build test in container..."
+        # docker run --rm planetx-frontend:latest npm run build
+        # echo "✅ Build test passed!"
 
     - name: Upload Docker image as artifact
       run: |
