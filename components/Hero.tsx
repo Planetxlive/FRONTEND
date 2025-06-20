@@ -67,7 +67,7 @@ export default function Hero() {
           </div>
 
           <div className="hidden lg:block absolute bottom-60 right-28 bg-white/90 backdrop-blur-sm rounded-2xl p-3 shadow-lg animate-float">
-            <p className="text-xs text-gray-600">Who's up for</p>
+            <p className="text-xs text-gray-600">Who&lsquo;s up for</p>
             <p className="text-xs text-gray-600">the property visit?</p>
           </div>
         </div>
@@ -78,7 +78,7 @@ export default function Hero() {
             Find your dream <span className="text-white">property.</span>
           </h1>
           <p className="text-lg sm:text-xl md:text-2xl text-purple-100 max-w-3xl mx-auto px-4">
-            Choose where to live and we'll show you the perfect home!
+            Choose where to live and we&lsquo;ll show you the perfect home!
           </p>
 
           {/* Dashed Arrow */}

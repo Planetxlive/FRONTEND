@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, ChangeEventHandler } from "react";
+import { ChangeEvent } from "react";
 
 interface PhoneInputProps {
   value: string;

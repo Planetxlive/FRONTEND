@@ -10,6 +10,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import BookingDialog from './BookingDialog';
+import Image from 'next/image';
 
 interface Hotel {
   id: number;
@@ -113,7 +114,7 @@ const HotelCard: React.FC<{ hotel: Hotel; onBookNow: (hotel: Hotel) => void }> =
     <div className="group relative transition-all duration-500 h-full">
       <Card className="overflow-hidden bg-white shadow-xl transition-all duration-500 border border-transparent group-hover:border-purple-500 rounded-2xl h-full flex flex-col">
         <div className="relative overflow-hidden">
-          <img
+          <Image
             src={hotel.image}
             alt={hotel.name}
             className="w-full h-64 object-cover rounded-t-2xl"

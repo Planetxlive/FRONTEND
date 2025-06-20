@@ -59,14 +59,14 @@ export default function StatsSection() {
           {/* Left Content */}
           <div className="text-white">
             <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
-              The world's best properties,
+              The world&lsquo;s best properties,
               <br />
               with over <span className="text-green-300">13 million</span>
               <br />
               <span className="text-green-300">reviews.</span>
             </h2>
             <p className="text-xl text-purple-100 leading-relaxed">
-              With over 16,500 properties in 180 countries, there's always
+              With over 16,500 properties in 180 countries, there&lsquo;s always
               room for a new adventure!
             </p>
           </div>

@@ -5,13 +5,9 @@ import {
   MapPin,
   Phone,
   MessageSquare,
-  Calendar,
-  Crown,
   Edit3,
   Save,
   X,
-  CheckCircle,
-  Shield,
   Camera,
 } from "lucide-react";
 import { User } from "../store/features/user/types";
@@ -26,7 +22,7 @@ interface UserProfileProps {
 const UserProfile: React.FC<UserProfileProps> = () => {
   const [isEditing, setIsEditing] = useState(false);
   const user = useSelector((state: RootState) => state.user.user);
-  const [editData, setEditData] = useState<User | null>(user);
+  const [editData] = useState<User | null>(user);
 
   const handleSave = () => {
     // onUpdateUser(editData);
@@ -45,26 +41,26 @@ const UserProfile: React.FC<UserProfileProps> = () => {
     setIsEditing(false);
   };
 
-  const getRoleBadgeColor = (role: string) => {
-    switch (role.toLowerCase()) {
-      case "admin":
-        return "bg-red-100 text-red-800 border-red-200";
-      case "moderator":
-        return "bg-purple-100 text-purple-800 border-purple-200";
-      case "premium":
-        return "bg-yellow-100 text-yellow-800 border-yellow-200";
-      default:
-        return "bg-gray-100 text-gray-800 border-gray-200";
-    }
-  };
+  // const getRoleBadgeColor = (role: string) => {
+  //   switch (role.toLowerCase()) {
+  //     case "admin":
+  //       return "bg-red-100 text-red-800 border-red-200";
+  //     case "moderator":
+  //       return "bg-purple-100 text-purple-800 border-purple-200";
+  //     case "premium":
+  //       return "bg-yellow-100 text-yellow-800 border-yellow-200";
+  //     default:
+  //       return "bg-gray-100 text-gray-800 border-gray-200";
+  //   }
+  // };
 
-  const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }).format(new Date(date));
-  };
+  // const formatDate = (date: Date) => {
+  //   return new Intl.DateTimeFormat("en-US", {
+  //     year: "numeric",
+  //     month: "long",
+  //     day: "numeric",
+  //   }).format(new Date(date));
+  // };
 
   return (
     <div className="max-w-4xl mt-20 mx-auto p-6 space-y-6">

@@ -7,23 +7,15 @@ import useAuth from "@/hooks/auth/useAuth";
 import { Modal } from "./ui/modal";
 import { Input } from "./ui/input";
 import { useSignUp } from "@/hooks/auth/useSignUp";
-import { InputOTP } from "./ui/input-otp";
-import { OTPInput } from "input-otp";
 import OtpInput from "./ui/otpInput";
 import { useSignIn } from "@/hooks/auth/useSignIn";
 import getUser from "@/app/api/user/getUser";
-import { useUser } from "@clerk/clerk-react";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/app/store/features/user/userSlice";
 import Sidebar from "./Sidebar";
 
-interface NavbarProps {
-  isScrolled: boolean;
-  onMenuClick: () => void;
-}
-
 export default function Navbar() {
-  const { isSignedIn, getToken, sessionId } = useAuth();
+  const { isSignedIn, getToken } = useAuth();
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState<boolean>(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState<boolean>(false);
   const [isScrolled, setIsScrolled] = useState(false);
@@ -40,7 +32,7 @@ export default function Navbar() {
         dispatch(setUser(await getUser((await getToken()) || "")));
     };
     fetchData();
-  }, [isSignedIn]);
+  }, [isSignedIn, dispatch, getToken]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -143,7 +135,7 @@ export default function Navbar() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={(e) => setIsSignInModalOpen(true)}
+                    onClick={() => setIsSignInModalOpen(true)}
                     className={`rounded-full px-4 py-2 transition-all duration-300 ${
                       isScrolled
                         ? "text-gray-700 hover:bg-gray-100"
@@ -156,7 +148,7 @@ export default function Navbar() {
                     className={`bg-green-500 hover:bg-green-600 text-white rounded-full px-4 py-2 transition-all duration-300 ${
                       isScrolled ? "shadow-md" : ""
                     }`}
-                    onClick={(e) => setIsSignUpModalOpen(true)}
+                    onClick={() => setIsSignUpModalOpen(true)}
                   >
                     Sign Up
                   </Button>
@@ -214,7 +206,7 @@ export default function Navbar() {
                   <Button
                     variant="ghost"
                     size="sm"
-                    onClick={(e) => setIsSignInModalOpen(true)}
+                    onClick={() => setIsSignInModalOpen(true)}
                     className={`rounded-full px-4 py-2 transition-all duration-300 ${
                       isScrolled
                         ? "text-gray-700 hover:bg-gray-100"
@@ -227,7 +219,7 @@ export default function Navbar() {
                     className={`bg-green-500 hover:bg-green-600 text-white rounded-full px-4 py-2 transition-all duration-300 ${
                       isScrolled ? "shadow-md" : ""
                     }`}
-                    onClick={(e) => setIsSignUpModalOpen(true)}
+                    onClick={() => setIsSignUpModalOpen(true)}
                   >
                     Sign Up
                   </Button>
@@ -285,7 +277,6 @@ function SignUpModal(props: ModalProps) {
     setFirstName,
     lastName,
     setLastName,
-    clearState,
     isAuthComplete,
   } = useSignUp();
 

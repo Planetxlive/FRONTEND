@@ -1,11 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useAuth, useSignUp as useClerkSignUp } from "@clerk/clerk-react";
 import { useState } from "react";
 import useLocation from "../location/useLocation";
 import createUser from "@/app/api/user/createUser";
 import { useDispatch } from "react-redux";
 import { setUser } from "@/app/store/features/user/userSlice";
-import { SelectSingleProviderInternal } from "react-day-picker";
-import { clear } from "console";
 
 export function useSignUp() {
   const { signUp: clerkSignUp, setActive } = useClerkSignUp();
