@@ -21,6 +21,14 @@ jobs:
       CLERK_SECRET_KEY: ${{secrets.CLERK_SECRET_KEY}}
 
     steps:
+    - name: Deploy to Vercel (example)
+      uses: amondnet/vercel-action@v25
+      with:
+        vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
+        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
+        vercel-args: '--prod'
+
     - name: Checkout code
       uses: actions/checkout@v4
 
@@ -37,24 +45,19 @@ jobs:
         echo "✅ Dependencies installed successfully!"
 
     - name: Build application
+      env:
+        NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
+        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}}
+        CLERK_SECRET_KEY: ${{secrets.CLERK_SECRET_KEY}}
       run: |
         echo "🏗️  Building application for production..."
         npm run build
         echo "✅ Application built successfully!"
-      env:
-        # Add your environment variables here
-        NEXT_PUBLIC_API_URL: ${{ secrets.NEXT_PUBLIC_API_URL }}
 
     - name: Deploy to Vercel (example)
       run: |
         echo "🚀 Starting deployment to Vercel..."
         echo "📦 Deploying to production environment..."
-      uses: amondnet/vercel-action@v25
-      with:
-        vercel-token: ${{ secrets.VERCEL_TOKEN }}
-        vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
-        vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-        vercel-args: '--prod'
 
     - name: Deployment Summary
       run: |
