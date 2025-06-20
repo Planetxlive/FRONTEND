@@ -14,12 +14,7 @@ import { User } from "../store/features/user/types";
 import { useSelector } from "react-redux";
 import { RootState } from "../store/store";
 
-interface UserProfileProps {
-  user: User;
-  onUpdateUser: (updatedData: User) => void;
-}
-
-const UserProfile: React.FC<UserProfileProps> = () => {
+const UserProfile = () => {
   const [isEditing, setIsEditing] = useState(false);
   const user = useSelector((state: RootState) => state.user.user);
   const [editData] = useState<User | null>(user);
