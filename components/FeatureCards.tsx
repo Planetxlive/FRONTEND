@@ -1,29 +1,33 @@
 'use client';
 
 import { MessageCircle, Users, Phone } from 'lucide-react';
+import Image from 'next/image';
 
 const features = [
   {
-    title: "Connect with Neighbors",
-    description: "Chat with people in your area",
-    image: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=400",
-    color: "from-yellow-400 to-orange-500",
-    icon: MessageCircle
+    title: 'Connect with Neighbors',
+    description: 'Chat with people in your area',
+    image:
+      'https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=400',
+    color: 'from-yellow-400 to-orange-500',
+    icon: MessageCircle,
   },
   {
-    title: "Join Community Groups",
-    description: "Find local property groups and events",
-    image: "https://images.pexels.com/photos/1546168/pexels-photo-1546168.jpeg?auto=compress&cs=tinysrgb&w=400",
-    color: "from-green-400 to-teal-500",
-    icon: Users
+    title: 'Join Community Groups',
+    description: 'Find local property groups and events',
+    image:
+      'https://images.pexels.com/photos/1546168/pexels-photo-1546168.jpeg?auto=compress&cs=tinysrgb&w=400',
+    color: 'from-green-400 to-teal-500',
+    icon: Users,
   },
   {
-    title: "Expert Consultation",
-    description: "Get professional property advice",
-    image: "https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=400",
-    color: "from-blue-500 to-purple-600",
-    icon: Phone
-  }
+    title: 'Expert Consultation',
+    description: 'Get professional property advice',
+    image:
+      'https://images.pexels.com/photos/590022/pexels-photo-590022.jpeg?auto=compress&cs=tinysrgb&w=400',
+    color: 'from-blue-500 to-purple-600',
+    icon: Phone,
+  },
 ];
 
 export default function FeatureCards() {
@@ -40,13 +44,18 @@ export default function FeatureCards() {
               <div className="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2">
                 {/* Image with Gradient Overlay */}
                 <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={feature.image}
-                    alt={feature.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
-                  <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-80 group-hover:opacity-70 transition-opacity duration-300`}></div>
-                  
+                  <div className="relative w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <Image
+                      src={feature.image}
+                      alt={feature.title}
+                      className="object-cover"
+                      fill
+                    />
+                  </div>
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-80 group-hover:opacity-70 transition-opacity duration-300`}
+                  ></div>
+
                   {/* Icon */}
                   <div className="absolute top-6 left-6">
                     <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
@@ -67,9 +76,7 @@ export default function FeatureCards() {
                   <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
                     {feature.title}
                   </h3>
-                  <p className="text-gray-600">
-                    {feature.description}
-                  </p>
+                  <p className="text-gray-600">{feature.description}</p>
                 </div>
               </div>
             </div>

@@ -32,7 +32,9 @@ export default function StatsSection() {
         <div className="absolute bottom-32 left-32 transform rotate-6 animate-float">
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-3 shadow-lg">
             <div className="w-12 h-8 bg-gradient-to-r from-purple-400 to-pink-400 rounded-lg mb-1"></div>
-            <p className="text-xs font-medium text-gray-800">Casa Angel Hostel</p>
+            <p className="text-xs font-medium text-gray-800">
+              Casa Angel Hostel
+            </p>
             <p className="text-xs text-gray-600">Oaxaca, Mexico</p>
           </div>
         </div>
@@ -59,14 +61,14 @@ export default function StatsSection() {
           {/* Left Content */}
           <div className="text-white">
             <h2 className="text-4xl md:text-5xl font-bold leading-tight mb-6">
-              The world's best properties,
+              The world&lsquo;s best properties,
               <br />
               with over <span className="text-green-300">13 million</span>
               <br />
               <span className="text-green-300">reviews.</span>
             </h2>
             <p className="text-xl text-purple-100 leading-relaxed">
-              With over 16,500 properties in 180 countries, there's always
+              With over 16,500 properties in 180 countries, there&lsquo;s always
               room for a new adventure!
             </p>
           </div>

@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { ChangeEvent, ChangeEventHandler } from "react";
+import { ChangeEvent } from 'react';
 
 interface PhoneInputProps {
   value: string;
@@ -13,7 +13,7 @@ export default function PhoneInput({ value, onChange, id }: PhoneInputProps) {
     return /^\d*$/.test(str);
   };
   const changed = (e: ChangeEvent<HTMLInputElement>) => {
-    if(!isOnlyNumbers(e.target.value) || e.target.value.length > 10) return;
+    if (!isOnlyNumbers(e.target.value) || e.target.value.length > 10) return;
     onChange(e.target.value);
   };
   return (

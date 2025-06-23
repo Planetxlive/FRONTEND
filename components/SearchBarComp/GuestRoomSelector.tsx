@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { Users, Minus, Plus } from "lucide-react";
+} from '@/components/ui/popover';
+import { Users, Minus, Plus } from 'lucide-react';
 
 interface Guests {
   adults: number;
@@ -82,7 +82,9 @@ const GuestRoomSelector: React.FC<GuestRoomSelectorProps> = ({
               >
                 <Minus className="h-4 w-4" />
               </Button>
-              <span className="w-8 text-center font-medium">{guests.adults}</span>
+              <span className="w-8 text-center font-medium">
+                {guests.adults}
+              </span>
               <Button
                 variant="outline"
                 size="sm"
@@ -111,7 +113,9 @@ const GuestRoomSelector: React.FC<GuestRoomSelectorProps> = ({
               >
                 <Minus className="h-4 w-4" />
               </Button>
-              <span className="w-8 text-center font-medium">{guests.children}</span>
+              <span className="w-8 text-center font-medium">
+                {guests.children}
+              </span>
               <Button
                 variant="outline"
                 size="sm"

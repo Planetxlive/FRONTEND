@@ -1,8 +1,7 @@
-"use client";
+'use client';
 
 import {
   X,
-  Edit,
   Home,
   Eye,
   Heart,
@@ -14,14 +13,14 @@ import {
   Settings,
   HelpCircle,
   LogOut,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import useSignOut from "@/hooks/auth/useSignOut";
-import useAuth from "@/hooks/auth/useAuth";
-import { useSelector } from "react-redux";
-import { RootState } from "@/app/store/store";
-import Link from "next/link";
+} from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
+import useSignOut from '@/hooks/auth/useSignOut';
+import useAuth from '@/hooks/auth/useAuth';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/store/store';
+import Link from 'next/link';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -45,7 +44,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
       {/* Sidebar */}
       <div
         className={`fixed top-0 right-0 h-full w-80 bg-white shadow-2xl z-50 transform transition-transform duration-300 ease-in-out ${
-          isOpen ? "translate-x-0" : "translate-x-full"
+          isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         <div className="flex flex-col h-full">

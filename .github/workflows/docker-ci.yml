@@ -1,0 +1,70 @@
+name: Docker CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  docker-build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Log Build Start
+      run: |
+        echo "🔨 Building Docker image..."
+        echo "📦 Creating container image: planetx-frontend:latest"
+
+    - name: Build Docker image
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        file: ./Dockerfile
+        push: false
+        tags: planetx-frontend:latest
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+        load: true
+
+    - name: Run tests in container
+      env:
+        NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY }}
+        CLERK_SECRET_KEY: ${{ secrets.CLERK_SECRET_KEY }}
+      run: |
+        echo "🧪 Running linting tests in Docker container..."
+        docker run --rm planetx-frontend:latest npm run lint
+        echo "✅ Linting tests passed!"
+        echo "📝 Running TypeScript type checking in container..."
+        docker run --rm planetx-frontend:latest npx tsc --noEmit
+        echo "✅ TypeScript type check passed!"
+        echo "🏗️  Running build test in container..."
+        docker run --rm \
+          -e NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}" \
+          -e CLERK_SECRET_KEY="${CLERK_SECRET_KEY}" \
+          planetx-frontend:latest npm run build
+        echo "✅ Build test passed!"
+
+    - name: Save Docker image as tarball
+      run: docker save planetx-frontend:latest -o planetx-frontend.tar
+
+    - name: Upload Docker image as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: docker-image
+        path: planetx-frontend.tar
+        retention-days: 7
+
+    - name: Docker Build Summary
+      run: |
+        echo "🐳 ========================================="
+        echo "🐳 DOCKER CI PIPELINE COMPLETED SUCCESSFULLY!"
+        echo "🐳 Docker image built and tested successfully!"
+        echo "🐳 Image: planetx-frontend:latest"
+        echo "🐳 ========================================="

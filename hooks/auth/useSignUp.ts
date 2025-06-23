@@ -1,16 +1,15 @@
-import { useAuth, useSignUp as useClerkSignUp } from "@clerk/clerk-react";
-import { useState } from "react";
-import useLocation from "../location/useLocation";
-import createUser from "@/app/api/user/createUser";
-import { useDispatch } from "react-redux";
-import { setUser } from "@/app/store/features/user/userSlice";
-import { SelectSingleProviderInternal } from "react-day-picker";
-import { clear } from "console";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useAuth, useSignUp as useClerkSignUp } from '@clerk/clerk-react';
+import { useState } from 'react';
+import useLocation from '../location/useLocation';
+import createUser from '@/app/api/user/createUser';
+import { useDispatch } from 'react-redux';
+import { setUser } from '@/app/store/features/user/userSlice';
 
 export function useSignUp() {
   const { signUp: clerkSignUp, setActive } = useClerkSignUp();
-  const [phoneNumber, setPhoneNumber] = useState<string>("");
-  const [otp, setOtp] = useState<string>("");
+  const [phoneNumber, setPhoneNumber] = useState<string>('');
+  const [otp, setOtp] = useState<string>('');
   const [signUpError, setSignUpError] = useState<string | undefined>(undefined);
   const [isOtpStage, setIsOtpStage] = useState<boolean>();
   const [isAuthComplete, setIsAuthComplete] = useState<boolean>(false);
@@ -19,11 +18,11 @@ export function useSignUp() {
   const [firstName, setFirstName] = useState<string | undefined>(undefined);
   const dispatch = useDispatch();
   const location = useLocation();
-  const {getToken} = useAuth()
+  const { getToken } = useAuth();
   const clearState = () => {
-    setPhoneNumber("");
-    setSignUpError("");
-    setOtp("");
+    setPhoneNumber('');
+    setSignUpError('');
+    setOtp('');
     setIsOtpStage(false);
     setIsAuthComplete(false);
     setIsLoading(false);
@@ -39,12 +38,12 @@ export function useSignUp() {
         firstName,
         lastName,
         phoneNumber: `+91${phoneNumber}`,
-        strategy: "phone_code",
+        strategy: 'phone_code',
       });
       // sendOtp();
       setIsOtpStage(true);
     } catch (err: any) {
-      setSignUpError(err.errors?.[0]?.message || "Failed to sIgn up");
+      setSignUpError(err.errors?.[0]?.message || 'Failed to sIgn up');
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -56,10 +55,10 @@ export function useSignUp() {
     setSignUpError(undefined);
     try {
       await clerkSignUp?.preparePhoneNumberVerification({
-        strategy: "phone_code",
+        strategy: 'phone_code',
       });
     } catch (err: any) {
-      setSignUpError(err.errors?.[0]?.message || "Failed to send otp");
+      setSignUpError(err.errors?.[0]?.message || 'Failed to send otp');
       console.error(err);
     } finally {
       setIsLoading(false);
@@ -74,11 +73,11 @@ export function useSignUp() {
         code: otp,
       });
       console.log(result);
-      if (result?.status === "complete") {
+      if (result?.status === 'complete') {
         console.log(await getToken());
         await setActive?.({ session: result.createdSessionId });
         console.log(location);
-        const user = await createUser(await getToken() || "", {
+        const user = await createUser((await getToken()) || '', {
           longitude: location.longitude,
           latitude: location.latitude,
           city: location.location.city,
@@ -90,10 +89,10 @@ export function useSignUp() {
         setIsOtpStage(false);
         setIsAuthComplete(true);
       } else {
-        setSignUpError("Verification incomplete");
+        setSignUpError('Verification incomplete');
       }
     } catch (err: any) {
-      setSignUpError(err.errors?.[0]?.message || "Invalid code");
+      setSignUpError(err.errors?.[0]?.message || 'Invalid code');
       console.error(err);
     } finally {
       setIsLoading(false);

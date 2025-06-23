@@ -1,3 +1,3 @@
-interface ConfigType {
-    backendUrl: string;
+export interface ConfigType {
+  backendUrl: string;
 }

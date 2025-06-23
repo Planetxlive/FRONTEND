@@ -1,4 +1,4 @@
-"use client";
+'use client';
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Star, MapPin, Calendar, Users, Hotel } from 'lucide-react';
@@ -8,8 +8,9 @@ import {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
-} from "@/components/ui/carousel";
+} from '@/components/ui/carousel';
 import BookingDialog from './BookingDialog';
+import Image from 'next/image';
 
 interface Hotel {
   id: number;
@@ -25,70 +26,76 @@ interface Hotel {
 const hotels: Hotel[] = [
   {
     id: 1,
-    name: "Santorini Luxury Resort",
-    location: "Santorini, Greece",
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    name: 'Santorini Luxury Resort',
+    location: 'Santorini, Greece',
+    image:
+      'https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     rating: 4.8,
-    duration: "Per night",
-    capacity: "2-4 guests",
-    description: "Luxury resort with stunning caldera views and infinity pools"
+    duration: 'Per night',
+    capacity: '2-4 guests',
+    description: 'Luxury resort with stunning caldera views and infinity pools',
   },
   {
     id: 2,
-    name: "Bali Beach Hotel",
-    location: "Seminyak, Bali",
-    image: "https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    name: 'Bali Beach Hotel',
+    location: 'Seminyak, Bali',
+    image:
+      'https://images.unsplash.com/photo-1571896349842-33c89424de2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     rating: 4.9,
-    duration: "Per night",
-    capacity: "1-6 guests",
-    description: "Beachfront hotel with traditional Balinese architecture"
+    duration: 'Per night',
+    capacity: '1-6 guests',
+    description: 'Beachfront hotel with traditional Balinese architecture',
   },
   {
     id: 3,
-    name: "Swiss Alpine Lodge",
-    location: "Zermatt, Switzerland",
-    image: "https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    name: 'Swiss Alpine Lodge',
+    location: 'Zermatt, Switzerland',
+    image:
+      'https://images.unsplash.com/photo-1564501049412-61c2a3083791?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     rating: 4.7,
-    duration: "Per night",
-    capacity: "2-8 guests",
-    description: "Mountain lodge with panoramic Alpine views"
+    duration: 'Per night',
+    capacity: '2-8 guests',
+    description: 'Mountain lodge with panoramic Alpine views',
   },
   {
     id: 4,
-    name: "Tokyo Grand Hotel",
-    location: "Shibuya, Tokyo",
-    image: "https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    name: 'Tokyo Grand Hotel',
+    location: 'Shibuya, Tokyo',
+    image:
+      'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     rating: 4.6,
-    duration: "Per night",
-    capacity: "1-4 guests",
-    description: "Modern luxury hotel in the heart of Tokyo"
+    duration: 'Per night',
+    capacity: '1-4 guests',
+    description: 'Modern luxury hotel in the heart of Tokyo',
   },
   {
     id: 5,
-    name: "Maldives Water Villa",
-    location: "Malé, Maldives",
-    image: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    name: 'Maldives Water Villa',
+    location: 'Malé, Maldives',
+    image:
+      'https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     rating: 5.0,
-    duration: "Per night",
-    capacity: "2-4 guests",
-    description: "Overwater villa with direct ocean access"
+    duration: 'Per night',
+    capacity: '2-4 guests',
+    description: 'Overwater villa with direct ocean access',
   },
   {
     id: 6,
-    name: "Iceland Ice Hotel",
-    location: "Reykjavik, Iceland",
-    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    name: 'Iceland Ice Hotel',
+    location: 'Reykjavik, Iceland',
+    image:
+      'https://images.unsplash.com/photo-1578662996442-48f60103fc96?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80',
     rating: 4.8,
-    duration: "Per night",
-    capacity: "2-6 guests",
-    description: "Unique ice hotel with Northern Lights viewing"
-  }
+    duration: 'Per night',
+    capacity: '2-6 guests',
+    description: 'Unique ice hotel with Northern Lights viewing',
+  },
 ];
 
 const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
   return (
     <div className="flex items-center gap-1">
-      {[1, 2, 3, 4, 5].map((star) => (
+      {[1, 2, 3, 4, 5].map(star => (
         <Star
           key={star}
           size={16}
@@ -96,8 +103,8 @@ const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
             star <= rating
               ? 'fill-yellow-400 text-yellow-400'
               : star - 0.5 <= rating
-              ? 'fill-yellow-400/50 text-yellow-400'
-              : 'text-gray-300'
+                ? 'fill-yellow-400/50 text-yellow-400'
+                : 'text-gray-300'
           } transition-colors duration-200`}
         />
       ))}
@@ -108,29 +115,35 @@ const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
   );
 };
 
-const HotelCard: React.FC<{ hotel: Hotel; onBookNow: (hotel: Hotel) => void }> = ({ hotel, onBookNow }) => {
+const HotelCard: React.FC<{
+  hotel: Hotel;
+  onBookNow: (hotel: Hotel) => void;
+}> = ({ hotel, onBookNow }) => {
   return (
     <div className="group relative transition-all duration-500 h-full">
       <Card className="overflow-hidden bg-white shadow-xl transition-all duration-500 border border-transparent group-hover:border-purple-500 rounded-2xl h-full flex flex-col">
         <div className="relative overflow-hidden">
-          <img
-            src={hotel.image}
-            alt={hotel.name}
-            className="w-full h-64 object-cover rounded-t-2xl"
-          />
+          <div className="w-full h-64 object-cover rounded-t-2xl relative">
+            <Image
+              src={hotel.image}
+              alt={hotel.name}
+              className="object-cover"
+              fill
+            />
+          </div>
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-t-2xl" />
-          
+
           <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 shadow-lg">
             <div className="flex items-center">
               <Hotel size={16} className="mr-1 text-primary" />
               <span className="text-sm font-medium text-primary">Hotel</span>
             </div>
           </div>
-          
+
           <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 shadow-lg">
             <StarRating rating={hotel.rating} />
           </div>
-          
+
           <div className="absolute bottom-4 left-4 flex items-center text-white">
             <MapPin size={16} className="mr-1" />
             <span className="text-sm font-medium">{hotel.location}</span>
@@ -184,14 +197,17 @@ const DestinationSlider: React.FC = () => {
       <div className="p-8">
         <Carousel
           opts={{
-            align: "start",
+            align: 'start',
             loop: true,
           }}
           className="w-full max-w-6xl mx-auto"
         >
           <CarouselContent className="-ml-2 md:-ml-4">
-            {hotels.map((hotel) => (
-              <CarouselItem key={hotel.id} className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3">
+            {hotels.map(hotel => (
+              <CarouselItem
+                key={hotel.id}
+                className="pl-2 md:pl-4 md:basis-1/2 lg:basis-1/3"
+              >
                 <div className="h-full">
                   <HotelCard hotel={hotel} onBookNow={handleBookNow} />
                 </div>

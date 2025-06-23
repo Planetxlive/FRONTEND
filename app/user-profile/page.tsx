@@ -1,32 +1,23 @@
-"use client";
-import React, { useState } from "react";
+'use client';
+import React, { useState } from 'react';
 import {
   User as UserIcon,
   MapPin,
   Phone,
   MessageSquare,
-  Calendar,
-  Crown,
   Edit3,
   Save,
   X,
-  CheckCircle,
-  Shield,
   Camera,
-} from "lucide-react";
-import { User } from "../store/features/user/types";
-import { useSelector } from "react-redux";
-import { RootState } from "../store/store";
+} from 'lucide-react';
+import { User } from '../store/features/user/types';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
-interface UserProfileProps {
-  user: User;
-  onUpdateUser: (updatedData: User) => void;
-}
-
-const UserProfile: React.FC<UserProfileProps> = () => {
+const UserProfile: React.FC = () => {
   const [isEditing, setIsEditing] = useState(false);
   const user = useSelector((state: RootState) => state.user.user);
-  const [editData, setEditData] = useState<User | null>(user);
+  const [editData] = useState<User | null>(user);
 
   const handleSave = () => {
     // onUpdateUser(editData);
@@ -45,27 +36,6 @@ const UserProfile: React.FC<UserProfileProps> = () => {
     setIsEditing(false);
   };
 
-  const getRoleBadgeColor = (role: string) => {
-    switch (role.toLowerCase()) {
-      case "admin":
-        return "bg-red-100 text-red-800 border-red-200";
-      case "moderator":
-        return "bg-purple-100 text-purple-800 border-purple-200";
-      case "premium":
-        return "bg-yellow-100 text-yellow-800 border-yellow-200";
-      default:
-        return "bg-gray-100 text-gray-800 border-gray-200";
-    }
-  };
-
-  const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    }).format(new Date(date));
-  };
-
   return (
     <div className="max-w-4xl mt-20 mx-auto p-6 space-y-6">
       {/* Cover Section */}
@@ -76,8 +46,8 @@ const UserProfile: React.FC<UserProfileProps> = () => {
             backgroundImage: user?.coverURL
               ? `url(${user?.coverURL})`
               : undefined,
-            backgroundSize: "cover",
-            backgroundPosition: "center",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
           }}
         >
           {isEditing && (
@@ -151,7 +121,7 @@ const UserProfile: React.FC<UserProfileProps> = () => {
                   />
                 ) : (
                   <h1 className="text-3xl font-bold text-gray-900">
-                    {user?.name || "Anonymous User"}
+                    {user?.name || 'Anonymous User'}
                   </h1>
                 )}
               </div>
@@ -211,7 +181,7 @@ const UserProfile: React.FC<UserProfileProps> = () => {
                 />
               ) : (
                 <p className="text-gray-900 p-3 bg-gray-50 rounded-lg">
-                  {user?.mobile || "Not provided"}
+                  {user?.mobile || 'Not provided'}
                 </p>
               )}
             </div>
@@ -233,7 +203,7 @@ const UserProfile: React.FC<UserProfileProps> = () => {
                 />
               ) : (
                 <p className="text-gray-900 p-3 bg-gray-50 rounded-lg">
-                  {user?.whatsappMobile || "Not provided"}
+                  {user?.whatsappMobile || 'Not provided'}
                 </p>
               )}
             </div>
@@ -264,7 +234,7 @@ const UserProfile: React.FC<UserProfileProps> = () => {
                 />
               ) : (
                 <p className="text-gray-900 p-3 bg-gray-50 rounded-lg">
-                  {user?.state || "Not provided"}
+                  {user?.state || 'Not provided'}
                 </p>
               )}
             </div>
@@ -285,7 +255,7 @@ const UserProfile: React.FC<UserProfileProps> = () => {
                 />
               ) : (
                 <p className="text-gray-900 p-3 bg-gray-50 rounded-lg">
-                  {user?.city || "Not provided"}
+                  {user?.city || 'Not provided'}
                 </p>
               )}
             </div>
@@ -293,7 +263,7 @@ const UserProfile: React.FC<UserProfileProps> = () => {
             {user?.latitude && user?.longitude && (
               <div className="mt-4 p-3 bg-blue-50 rounded-lg">
                 <p className="text-sm text-blue-700">
-                  <strong>Coordinates:</strong> {user?.latitude},{" "}
+                  <strong>Coordinates:</strong> {user?.latitude},{' '}
                   {user?.longitude}
                 </p>
               </div>
