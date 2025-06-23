@@ -32,7 +32,9 @@ export default function StatsSection() {
         <div className="absolute bottom-32 left-32 transform rotate-6 animate-float">
           <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-3 shadow-lg">
             <div className="w-12 h-8 bg-gradient-to-r from-purple-400 to-pink-400 rounded-lg mb-1"></div>
-            <p className="text-xs font-medium text-gray-800">Casa Angel Hostel</p>
+            <p className="text-xs font-medium text-gray-800">
+              Casa Angel Hostel
+            </p>
             <p className="text-xs text-gray-600">Oaxaca, Mexico</p>
           </div>
         </div>

@@ -1,24 +1,24 @@
-"use client";
+'use client';
 
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from "@/components/ui/dialog";
-import { Button } from "@/components/ui/button";
-import { Calendar } from "@/components/ui/calendar";
+} from '@/components/ui/dialog';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
-import { CalendarIcon, Users, Minus, Plus, Hotel } from "lucide-react";
-import { format } from "date-fns";
-import { cn } from "@/lib/utils";
-import Image from "next/image";
+} from '@/components/ui/popover';
+import { CalendarIcon, Users, Minus, Plus, Hotel } from 'lucide-react';
+import { format } from 'date-fns';
+import { cn } from '@/lib/utils';
+import Image from 'next/image';
 
 interface Hotel {
   id: number;
@@ -50,24 +50,27 @@ const BookingDialog: React.FC<BookingDialogProps> = ({
   const [isToCalendarOpen, setIsToCalendarOpen] = useState(false);
 
   const handleGuestCountChange = (increment: boolean) => {
-    setGuestCount((prev) => (increment ? Math.min(prev + 1, 20) : Math.max(prev - 1, 1)));
+    setGuestCount(prev =>
+      increment ? Math.min(prev + 1, 20) : Math.max(prev - 1, 1)
+    );
   };
 
   const handleRoomCountChange = (increment: boolean) => {
-    setRoomCount((prev) => (increment ? Math.min(prev + 1, 10) : Math.max(prev - 1, 1)));
+    setRoomCount(prev =>
+      increment ? Math.min(prev + 1, 10) : Math.max(prev - 1, 1)
+    );
   };
 
   const handleBooking = () => {
     if (!fromDate || !toDate || !hotel) return;
 
-    console.log("Booking details:", {
+    console.log('Booking details:', {
       hotel: hotel.name,
       fromDate,
       toDate,
       guestCount,
       roomCount,
     });
-
 
     onClose();
   };
@@ -90,7 +93,7 @@ const BookingDialog: React.FC<BookingDialogProps> = ({
           {/* Hotel Summary */}
           <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4">
             <div className="flex items-center space-x-4">
-              <div className="w-20 h-20 object-cover rounded-lg relative" >
+              <div className="w-20 h-20 object-cover rounded-lg relative">
                 <Image
                   src={hotel.image}
                   alt={hotel.name}
@@ -114,28 +117,31 @@ const BookingDialog: React.FC<BookingDialogProps> = ({
             {/* Check-in */}
             <div className="space-y-2">
               <label className="text-sm font-medium">Check-in Date</label>
-              <Popover open={isFromCalendarOpen} onOpenChange={setIsFromCalendarOpen}>
+              <Popover
+                open={isFromCalendarOpen}
+                onOpenChange={setIsFromCalendarOpen}
+              >
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
                     className={cn(
-                      "w-full justify-start text-left font-normal",
-                      !fromDate && "text-muted-foreground"
+                      'w-full justify-start text-left font-normal',
+                      !fromDate && 'text-muted-foreground'
                     )}
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
-                    {fromDate ? format(fromDate, "PPP") : "Select date"}
+                    {fromDate ? format(fromDate, 'PPP') : 'Select date'}
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
                   <Calendar
                     mode="single"
                     selected={fromDate}
-                    onSelect={(date) => {
+                    onSelect={date => {
                       setFromDate(date);
                       setIsFromCalendarOpen(false);
                     }}
-                    disabled={(date) => date < new Date()}
+                    disabled={date => date < new Date()}
                     initialFocus
                     className="pointer-events-auto"
                   />
@@ -146,28 +152,31 @@ const BookingDialog: React.FC<BookingDialogProps> = ({
             {/* Check-out */}
             <div className="space-y-2">
               <label className="text-sm font-medium">Check-out Date</label>
-              <Popover open={isToCalendarOpen} onOpenChange={setIsToCalendarOpen}>
+              <Popover
+                open={isToCalendarOpen}
+                onOpenChange={setIsToCalendarOpen}
+              >
                 <PopoverTrigger asChild>
                   <Button
                     variant="outline"
                     className={cn(
-                      "w-full justify-start text-left font-normal",
-                      !toDate && "text-muted-foreground"
+                      'w-full justify-start text-left font-normal',
+                      !toDate && 'text-muted-foreground'
                     )}
                   >
                     <CalendarIcon className="mr-2 h-4 w-4" />
-                    {toDate ? format(toDate, "PPP") : "Select date"}
+                    {toDate ? format(toDate, 'PPP') : 'Select date'}
                   </Button>
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-0" align="start">
                   <Calendar
                     mode="single"
                     selected={toDate}
-                    onSelect={(date) => {
+                    onSelect={date => {
                       setToDate(date);
                       setIsToCalendarOpen(false);
                     }}
-                    disabled={(date) => date < (fromDate || new Date())}
+                    disabled={date => date < (fromDate || new Date())}
                     initialFocus
                     className="pointer-events-auto"
                   />
@@ -183,7 +192,7 @@ const BookingDialog: React.FC<BookingDialogProps> = ({
               <div className="flex items-center space-x-2">
                 <Users className="h-5 w-5 text-muted-foreground" />
                 <span className="font-medium">
-                  {guestCount} {guestCount === 1 ? "Guest" : "Guests"}
+                  {guestCount} {guestCount === 1 ? 'Guest' : 'Guests'}
                 </span>
               </div>
               <div className="flex items-center space-x-2">
@@ -196,7 +205,9 @@ const BookingDialog: React.FC<BookingDialogProps> = ({
                 >
                   <Minus className="h-4 w-4" />
                 </Button>
-                <span className="min-w-[3ch] text-center font-medium">{guestCount}</span>
+                <span className="min-w-[3ch] text-center font-medium">
+                  {guestCount}
+                </span>
                 <Button
                   variant="outline"
                   size="icon"
@@ -217,7 +228,7 @@ const BookingDialog: React.FC<BookingDialogProps> = ({
               <div className="flex items-center space-x-2">
                 <Hotel className="h-5 w-5 text-muted-foreground" />
                 <span className="font-medium">
-                  {roomCount} {roomCount === 1 ? "Room" : "Rooms"}
+                  {roomCount} {roomCount === 1 ? 'Room' : 'Rooms'}
                 </span>
               </div>
               <div className="flex items-center space-x-2">
@@ -230,7 +241,9 @@ const BookingDialog: React.FC<BookingDialogProps> = ({
                 >
                   <Minus className="h-4 w-4" />
                 </Button>
-                <span className="min-w-[3ch] text-center font-medium">{roomCount}</span>
+                <span className="min-w-[3ch] text-center font-medium">
+                  {roomCount}
+                </span>
                 <Button
                   variant="outline"
                   size="icon"

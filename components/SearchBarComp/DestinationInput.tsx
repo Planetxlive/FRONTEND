@@ -1,28 +1,32 @@
 'use client';
 
 import React, { useState } from 'react';
-import { Input } from "@/components/ui/input";
-import { MapPin } from "lucide-react";
+import { Input } from '@/components/ui/input';
+import { MapPin } from 'lucide-react';
 
 interface DestinationInputProps {
   value: string;
   onChange: (value: string) => void;
 }
 
-const DestinationInput: React.FC<DestinationInputProps> = ({ value, onChange }) => {
+const DestinationInput: React.FC<DestinationInputProps> = ({
+  value,
+  onChange,
+}) => {
   const suggestions = [
-    "New York, USA",
-    "London, UK", 
-    "Paris, France",
-    "Tokyo, Japan",
-    "Dubai, UAE",
-    "Singapore",
-    "Bangkok, Thailand",
-    "Mumbai, India"
+    'New York, USA',
+    'London, UK',
+    'Paris, France',
+    'Tokyo, Japan',
+    'Dubai, UAE',
+    'Singapore',
+    'Bangkok, Thailand',
+    'Mumbai, India',
   ];
 
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const [filteredSuggestions, setFilteredSuggestions] = useState<string[]>(suggestions);
+  const [filteredSuggestions, setFilteredSuggestions] =
+    useState<string[]>(suggestions);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value;

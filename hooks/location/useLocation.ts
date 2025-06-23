@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-import { LocationType } from "./types";
-import fetchLocation from "@/app/api/location/fetchLocation";
+import { useEffect, useState } from 'react';
+import { LocationType } from './types';
+import fetchLocation from '@/app/api/location/fetchLocation';
 
 export default function useLocation(): LocationType {
   const [longitude, setLongitude] = useState<number | undefined>(undefined);
@@ -8,30 +8,37 @@ export default function useLocation(): LocationType {
   const [location, setLocation] = useState({
     city: undefined,
     country: undefined,
-    state: undefined
+    state: undefined,
   });
 
   useEffect(() => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
-        async (position) => {
+        async position => {
           setLongitude(position.coords.longitude);
           setLatitude(position.coords.latitude);
-          const location = await fetchLocation({longitude: position.coords.longitude, latitude: position.coords.latitude})
-          setLocation({city: location.city, state: location.state, country: location.country})
+          const location = await fetchLocation({
+            longitude: position.coords.longitude,
+            latitude: position.coords.latitude,
+          });
+          setLocation({
+            city: location.city,
+            state: location.state,
+            country: location.country,
+          });
         },
-        (error) => {
+        error => {
           console.log(error);
         }
       );
     } else {
-      console.log("Cant get location");
+      console.log('Cant get location');
     }
   }, []);
 
   return {
     longitude,
     latitude,
-    location
+    location,
   };
 }
