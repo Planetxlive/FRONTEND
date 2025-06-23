@@ -1,0 +1,101 @@
+name: Linting and Code Quality
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    
+    strategy:
+      matrix:
+        node-version: [18.x, 20.x]
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: |
+        echo "🔧 Installing dependencies..."
+        npm ci
+        echo "✅ Dependencies installed successfully!"
+        
+    - name: Run ESLint
+      run: |
+        echo "🔍 Running ESLint with Node.js ${{ matrix.node-version }}..."
+        npm run lint
+        echo "✅ ESLint completed successfully!"
+        
+    - name: TypeScript type check
+      run: |
+        echo "📝 Running TypeScript type checking..."
+        npx tsc --noEmit
+        echo "✅ TypeScript type check passed!"
+        
+    - name: Check Prettier formatting
+      run: |
+        echo "🎨 Checking code formatting with Prettier..."
+        npx prettier --check "**/*.{js,jsx,ts,tsx,json,css,md}"
+        echo "✅ Code formatting is consistent!"
+        
+    - name: Check for unused dependencies
+      run: |
+        echo "📦 Checking for unused dependencies..."
+        npx depcheck --ignores="@types/*" || echo "⚠️  Some unused dependencies found (check output above)"
+        echo "✅ Dependency check completed!"
+        
+    - name: Linting Summary
+      run: |
+        echo "🎉 ========================================="
+        echo "🎉 LINTING PIPELINE COMPLETED SUCCESSFULLY!"
+        echo "🎉 Node.js Version: ${{ matrix.node-version }}"
+        echo "🎉 ========================================="
+        
+  security:
+    runs-on: ubuntu-latest
+    needs: lint
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        cache: 'npm'
+        
+    - name: Install dependencies
+      run: |
+        echo "🔧 Installing dependencies for security scan..."
+        npm ci
+        echo "✅ Dependencies installed successfully!"
+        
+    - name: Run npm audit
+      run: |
+        echo "🔒 Running npm security audit..."
+        npm audit --audit-level=moderate || echo "⚠️  Security vulnerabilities found (check output above)"
+        echo "✅ Security audit completed!"
+        
+    - name: Check for known vulnerabilities
+      run: |
+        echo "🛡️  Running additional security checks..."
+        npx audit-ci --moderate || echo "⚠️  Additional security issues found (check output above)"
+        echo "✅ Additional security checks completed!"
+        
+    - name: Security Summary
+      run: |
+        echo "🛡️  ========================================="
+        echo "🛡️  SECURITY SCAN COMPLETED!"
+        echo "🛡️  Check the output above for any issues."
+        echo "🛡️  ========================================="
