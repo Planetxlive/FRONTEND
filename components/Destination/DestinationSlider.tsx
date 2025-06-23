@@ -10,6 +10,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import BookingDialog from './BookingDialog';
+import Image from 'next/image';
 
 interface Hotel {
   id: number;
@@ -92,13 +93,12 @@ const StarRating: React.FC<{ rating: number }> = ({ rating }) => {
         <Star
           key={star}
           size={16}
-          className={`${
-            star <= rating
-              ? 'fill-yellow-400 text-yellow-400'
-              : star - 0.5 <= rating
+          className={`${star <= rating
+            ? 'fill-yellow-400 text-yellow-400'
+            : star - 0.5 <= rating
               ? 'fill-yellow-400/50 text-yellow-400'
               : 'text-gray-300'
-          } transition-colors duration-200`}
+            } transition-colors duration-200`}
         />
       ))}
       <span className="ml-2 text-sm font-medium text-muted-foreground">
@@ -113,24 +113,27 @@ const HotelCard: React.FC<{ hotel: Hotel; onBookNow: (hotel: Hotel) => void }> =
     <div className="group relative transition-all duration-500 h-full">
       <Card className="overflow-hidden bg-white shadow-xl transition-all duration-500 border border-transparent group-hover:border-purple-500 rounded-2xl h-full flex flex-col">
         <div className="relative overflow-hidden">
-          <img
-            src={hotel.image}
-            alt={hotel.name}
-            className="w-full h-64 object-cover rounded-t-2xl"
-          />
+          <div className="w-full h-64 object-cover rounded-t-2xl relative">
+            <Image
+              src={hotel.image}
+              alt={hotel.name}
+              className="object-cover"
+              fill
+            />
+          </div>
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent rounded-t-2xl" />
-          
+
           <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 shadow-lg">
             <div className="flex items-center">
               <Hotel size={16} className="mr-1 text-primary" />
               <span className="text-sm font-medium text-primary">Hotel</span>
             </div>
           </div>
-          
+
           <div className="absolute top-4 left-4 bg-white/90 backdrop-blur-sm rounded-full px-3 py-1 shadow-lg">
             <StarRating rating={hotel.rating} />
           </div>
-          
+
           <div className="absolute bottom-4 left-4 flex items-center text-white">
             <MapPin size={16} className="mr-1" />
             <span className="text-sm font-medium">{hotel.location}</span>

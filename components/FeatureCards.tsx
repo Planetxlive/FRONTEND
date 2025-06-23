@@ -1,6 +1,7 @@
 'use client';
 
 import { MessageCircle, Users, Phone } from 'lucide-react';
+import Image from 'next/image';
 
 const features = [
   {
@@ -40,13 +41,16 @@ export default function FeatureCards() {
               <div className="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2">
                 {/* Image with Gradient Overlay */}
                 <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={feature.image}
-                    alt={feature.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                  />
+                  <div className="relative w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                    <Image
+                      src={feature.image}
+                      alt={feature.title}
+                      className="object-cover"
+                      fill
+                    />
+                  </div>
                   <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-80 group-hover:opacity-70 transition-opacity duration-300`}></div>
-                  
+
                   {/* Icon */}
                   <div className="absolute top-6 left-6">
                     <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">

@@ -3,6 +3,7 @@
 import { Heart, MapPin, Bed, Bath, Square, Star, Camera } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import Image from 'next/image';
 
 const properties = [
   {
@@ -141,11 +142,14 @@ export default function PropertyCards() {
             >
               {/* Image Container */}
               <div className="relative overflow-hidden">
-                <img
+                <div className='relative w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700'>
+                <Image
                   src={property.image}
                   alt={property.title}
-                  className="w-full h-64 object-cover group-hover:scale-110 transition-transform duration-700"
+                  className="object-cover"
+                  fill
                 />
+                </div>
                 
                 {/* Overlays */}
                 <div className="absolute top-4 left-4 right-4 flex items-center justify-between">

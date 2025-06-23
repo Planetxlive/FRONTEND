@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import getUser from "@/app/api/user/getUser";
 import { setUser } from "@/app/store/features/user/userSlice";
 import { useAuth, useSignIn as useClerkSignIn } from "@clerk/clerk-react";
-import { use, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 
 export function useSignIn() {

@@ -1,6 +1,7 @@
 'use client';
 
 import { MessageCircle, Users } from 'lucide-react';
+import Image from 'next/image';
 
 export default function ChatSection() {
   return (
@@ -11,14 +12,17 @@ export default function ChatSection() {
           <div className="relative">
             <div className="absolute -top-4 -left-4 w-32 h-32 bg-purple-100 rounded-full opacity-50"></div>
             <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-blue-100 rounded-full opacity-50"></div>
-            
+
             <div className="relative bg-gradient-to-br from-purple-50 to-blue-50 rounded-3xl p-8">
-              <img
-                src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600"
-                alt="People chatting"
-                className="w-full h-80 object-cover rounded-2xl"
-              />
-              
+              <div className="w-full h-80 object-cover rounded-2xl relative">
+                <Image
+                  src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=600"
+                  alt="People chatting"
+                  className="object-cover"
+                  fill
+                />
+              </div>
+
               {/* Chat Overlay */}
               <div className="absolute top-12 right-12 bg-white rounded-2xl p-4 shadow-lg max-w-xs">
                 <div className="flex items-center space-x-3 mb-3">
@@ -31,7 +35,7 @@ export default function ChatSection() {
                   </div>
                 </div>
                 <div className="bg-purple-500 text-white rounded-2xl p-3 mb-2">
-                  <p className="text-sm">Hi there! I just see that you'll be at the Property Tour!</p>
+                  <p className="text-sm">Hi there! I just see that you&lsquo;ll be at the Property Tour!</p>
                 </div>
                 <p className="text-xs text-gray-500">10:22pm</p>
               </div>

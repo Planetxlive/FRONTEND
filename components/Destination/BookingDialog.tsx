@@ -18,6 +18,7 @@ import {
 import { CalendarIcon, Users, Minus, Plus, Hotel } from "lucide-react";
 import { format } from "date-fns";
 import { cn } from "@/lib/utils";
+import Image from "next/image";
 
 interface Hotel {
   id: number;
@@ -67,7 +68,7 @@ const BookingDialog: React.FC<BookingDialogProps> = ({
       roomCount,
     });
 
-    
+
     onClose();
   };
 
@@ -89,11 +90,14 @@ const BookingDialog: React.FC<BookingDialogProps> = ({
           {/* Hotel Summary */}
           <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4">
             <div className="flex items-center space-x-4">
-              <img
-                src={hotel.image}
-                alt={hotel.name}
-                className="w-20 h-20 object-cover rounded-lg"
-              />
+              <div className="w-20 h-20 object-cover rounded-lg relative" >
+                <Image
+                  src={hotel.image}
+                  alt={hotel.name}
+                  className="object-cover"
+                  fill
+                />
+              </div>
               <div>
                 <h3 className="font-semibold text-lg">{hotel.name}</h3>
                 <p className="text-muted-foreground">{hotel.location}</p>

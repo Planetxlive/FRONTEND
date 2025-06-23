@@ -1,7 +1,7 @@
 "use client"
 
 import { useEffect, ReactNode, useContext, createContext } from "react"
-import { Ghost, X } from "lucide-react"
+import { X } from "lucide-react"
 import { Button } from "./button"
 
 type ModalProps = {

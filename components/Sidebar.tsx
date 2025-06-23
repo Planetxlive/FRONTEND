@@ -2,7 +2,6 @@
 
 import {
   X,
-  Edit,
   Home,
   Eye,
   Heart,

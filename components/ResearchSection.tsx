@@ -2,6 +2,7 @@
 
 import { TrendingUp, MapPin, Search, BarChart3, FileText, Calculator } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import Image from 'next/image';
 
 const insights = [
   {
@@ -73,13 +74,16 @@ export default function ResearchSection() {
                 <div className="bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden transform hover:-translate-y-2">
                   {/* Image with Gradient Overlay */}
                   <div className="relative h-48 overflow-hidden">
-                    <img
-                      src={insight.image}
-                      alt={insight.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
+                    <div className='relative w-full h-full object-cover group-hover:scale-110 transition-transform duration-700'>
+                      <Image
+                        src={insight.image}
+                        alt={insight.title}
+                        className="object-cover"
+                        fill
+                      />
+                    </div>
                     <div className={`absolute inset-0 bg-gradient-to-br ${insight.color} opacity-80 group-hover:opacity-70 transition-opacity duration-300`}></div>
-                    
+
                     {/* Icon */}
                     <div className="absolute top-6 left-6">
                       <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
@@ -104,8 +108,8 @@ export default function ResearchSection() {
                     <p className="text-gray-600 mb-4">
                       {insight.description}
                     </p>
-                    <Button 
-                      variant="ghost" 
+                    <Button
+                      variant="ghost"
                       className="text-purple-600 hover:text-purple-700 hover:bg-purple-50 p-0 h-auto font-semibold group-hover:translate-x-2 transition-transform duration-300"
                     >
                       Explore →
@@ -156,7 +160,7 @@ export default function ResearchSection() {
           {/* Background Decorations */}
           <div className="absolute top-0 left-0 w-32 h-32 bg-white/10 rounded-full -translate-x-16 -translate-y-16"></div>
           <div className="absolute bottom-0 right-0 w-40 h-40 bg-white/10 rounded-full translate-x-20 translate-y-20"></div>
-          
+
           <div className="relative z-10">
             <h2 className="text-3xl md:text-4xl font-bold mb-4">
               Ready to find your dream property?

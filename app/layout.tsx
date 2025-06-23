@@ -3,9 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { StoreProvider } from "./store/StoreProvider";
 import { ClerkProvider } from "@clerk/nextjs";
-import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar";
-import Sidebar from "@/components/Sidebar";
 
 const inter = Inter({ subsets: ["latin"] });
 
