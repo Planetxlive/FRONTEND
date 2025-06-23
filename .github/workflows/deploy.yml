@@ -40,10 +40,12 @@ jobs:
         npm run build
         echo "✅ Application built successfully!"
 
-    - name: Deploy to Vercel (example)
+    - name: Log Deployment Start
       run: |
         echo "🚀 Starting deployment to Vercel..."
         echo "📦 Deploying to production environment..."
+
+    - name: Deploy to Vercel
       uses: amondnet/vercel-action@v25
       with:
         vercel-token: ${{ secrets.VERCEL_TOKEN }}
@@ -57,17 +59,3 @@ jobs:
         echo "🎉 DEPLOYMENT COMPLETED SUCCESSFULLY!"
         echo "🎉 Application deployed to production!"
         echo "🎉 ========================================="
-
-    # Alternative: Deploy to other platforms
-    # - name: Deploy to Netlify
-    #   run: |
-    #     echo "🚀 Starting deployment to Netlify..."
-    #   uses: nwtgck/actions-netlify@v2.0
-    #   with:
-    #     publish-dir: './out'
-    #     production-branch: main
-    #     github-token: ${{ secrets.GITHUB_TOKEN }}
-    #     deploy-message: "Deploy from GitHub Actions"
-    #   env:
-    #     NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-    #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }} 

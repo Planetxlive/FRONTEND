@@ -15,14 +15,14 @@ jobs:
       uses: actions/checkout@v4
 
     - name: Set up Docker Buildx
-      run: |
-        echo "🐳 Setting up Docker Buildx..."
       uses: docker/setup-buildx-action@v3
 
-    - name: Build Docker image
+    - name: Log Build Start
       run: |
         echo "🔨 Building Docker image..."
         echo "📦 Creating container image: planetx-frontend:latest"
+
+    - name: Build Docker image
       uses: docker/build-push-action@v5
       with:
         context: .
@@ -40,24 +40,21 @@ jobs:
         echo "🧪 Running linting tests in Docker container..."
         docker run --rm planetx-frontend:latest npm run lint
         echo "✅ Linting tests passed!"
-        
         echo "📝 Running TypeScript type checking in container..."
         docker run --rm planetx-frontend:latest npx tsc --noEmit
         echo "✅ TypeScript type check passed!"
-        
         echo "🏗️  Running build test in container..."
         docker run --rm planetx-frontend:latest npm run build
         echo "✅ Build test passed!"
 
+    - name: Save Docker image as tarball
+      run: docker save planetx-frontend:latest -o planetx-frontend.tar
+
     - name: Upload Docker image as artifact
-      run: |
-        echo "📤 Uploading Docker image as artifact..."
       uses: actions/upload-artifact@v4
       with:
         name: docker-image
-        path: |
-          !node_modules
-          !.next
+        path: planetx-frontend.tar
         retention-days: 7
 
     - name: Docker Build Summary
@@ -66,4 +63,4 @@ jobs:
         echo "🐳 DOCKER CI PIPELINE COMPLETED SUCCESSFULLY!"
         echo "🐳 Docker image built and tested successfully!"
         echo "🐳 Image: planetx-frontend:latest"
-        echo "🐳 =========================================" 
+        echo "🐳 ========================================="
