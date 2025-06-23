@@ -45,7 +45,10 @@ jobs:
         docker run --rm planetx-frontend:latest npx tsc --noEmit
         echo "✅ TypeScript type check passed!"
         echo "🏗️  Running build test in container..."
-        docker run --rm planetx-frontend:latest npm run build
+        docker run --rm \
+          -e NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}" \
+          -e CLERK_SECRET_KEY="${CLERK_SECRET_KEY}" \
+          planetx-frontend:latest npm run build
         echo "✅ Build test passed!"
 
     - name: Save Docker image as tarball
