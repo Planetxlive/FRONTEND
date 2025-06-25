@@ -179,7 +179,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
             {/* Menu Items */}
             <div className="p-6 space-y-2">
               <div
-                onClick={() => router.push('/blog')}
+                onClick={() => {
+                  onClose();
+                  router.push('/blog');
+                }}
                 className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors"
               >
                 <Diamond className="w-5 h-5 text-gray-600" />

@@ -7,6 +7,7 @@ export interface BlogPost {
   date: string;
   tags: string[];
   category: string;
+  content: string;
 }
 
 export interface PaginationInfo {

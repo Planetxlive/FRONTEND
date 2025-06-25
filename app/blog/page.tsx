@@ -12,6 +12,7 @@ const POSTS_PER_PAGE = 9;
 
 function BlogPageContent() {
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
   const data = useSelector((state: RootState) => state.blogs.blogs);
@@ -50,6 +51,11 @@ function BlogPageContent() {
     router.push('/blog');
   };
 
+  const handleBlogClick = (id: string) => {
+    setLoading(true);
+    router.push(`/blog/${id}`);
+  };
+
   return (
     <div className="min-h-screen bg-white">
       <main>
@@ -83,6 +89,7 @@ function BlogPageContent() {
               posts={currentPosts}
               title="LATEST ARTICLES"
               subtitle="Discover exceptional real estate insights, market analysis, and luxury property features curated by our team of industry experts."
+              onBlogClick={handleBlogClick}
             />
 
             {/* Enhanced Category Filter - moved below articles */}
@@ -152,6 +159,14 @@ function BlogPageContent() {
           </div>
         )}
       </main>
+      {loading && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-white bg-opacity-80">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-violet-600 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Loading article...</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
