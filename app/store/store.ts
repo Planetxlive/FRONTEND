@@ -5,7 +5,7 @@ import blogsReducers from './features/blogs/blogsSlice';
 export const store = configureStore({
   reducer: {
     user: userReducers,
-    blogs: blogsReducers
+    blogs: blogsReducers,
   },
 });
 

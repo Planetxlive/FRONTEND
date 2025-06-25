@@ -14,7 +14,7 @@ function BlogPageContent() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const searchParams = useSearchParams();
   const router = useRouter();
-  const data = useSelector((state: RootState) => state.blogs.blogs)
+  const data = useSelector((state: RootState) => state.blogs.blogs);
 
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
 

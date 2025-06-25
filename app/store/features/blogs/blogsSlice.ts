@@ -20,7 +20,7 @@ const blogsSlice = createSlice({
     },
     clearBlogs(state) {
       state.blogs = null;
-    }
+    },
   },
 });
 
