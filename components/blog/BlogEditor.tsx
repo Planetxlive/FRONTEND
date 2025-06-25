@@ -114,7 +114,8 @@ export default function BlogEditor({
     if (formData.tags.length === 0)
       newErrors.tags = 'At least one tag is required';
     if (!formData.location.trim()) newErrors.location = 'Location is required';
-    if (!formData.contactInfo.trim()) newErrors.contactInfo = 'Contact info is required';
+    if (!formData.contactInfo.trim())
+      newErrors.contactInfo = 'Contact info is required';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -307,7 +308,9 @@ export default function BlogEditor({
                 }`}
               />
               {errors.contactInfo && (
-                <p className="text-red-500 text-sm mt-2">{errors.contactInfo}</p>
+                <p className="text-red-500 text-sm mt-2">
+                  {errors.contactInfo}
+                </p>
               )}
             </div>
           </div>

@@ -318,13 +318,17 @@ export default function BlogDetailPage() {
               </div>
               {post.location && (
                 <div className="flex items-center space-x-2">
-                  <span role="img" aria-label="Location">📍</span>
+                  <span role="img" aria-label="Location">
+                    📍
+                  </span>
                   <span>{post.location}</span>
                 </div>
               )}
               {post.contactInfo && (
                 <div className="flex items-center space-x-2">
-                  <span role="img" aria-label="Contact">📞</span>
+                  <span role="img" aria-label="Contact">
+                    📞
+                  </span>
                   <span>{post.contactInfo}</span>
                 </div>
               )}
