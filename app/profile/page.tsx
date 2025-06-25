@@ -187,7 +187,7 @@ const UserProfile: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
+              <label className="text-sm font-medium text-gray-700 mb-2 flex items-center gap-2">
                 <MessageSquare size={16} className="text-green-500" />
                 WhatsApp Mobile
               </label>
