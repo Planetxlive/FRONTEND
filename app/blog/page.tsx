@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import EditorialSection from '@/components/blog/EditorialSection';
 import Pagination from '@/components/blog/Pagination';
@@ -9,7 +9,7 @@ import postsData from '@/data/post.json';
 
 const POSTS_PER_PAGE = 9;
 
-export default function BlogPage() {
+function BlogPageContent() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -135,5 +135,20 @@ export default function BlogPage() {
         )}
       </main>
     </div>
+  );
+}
+
+export default function BlogPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-violet-600 mx-auto"></div>
+          <p className="mt-4 text-gray-600">Loading blog...</p>
+        </div>
+      </div>
+    }>
+      <BlogPageContent />
+    </Suspense>
   );
 }
