@@ -13,7 +13,7 @@ function BlogPageContent() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const searchParams = useSearchParams();
   const router = useRouter();
-  
+
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
 
   // Filter posts based on category
@@ -39,7 +39,7 @@ function BlogPageContent() {
     currentPage,
     totalPages,
     totalPosts,
-    postsPerPage: POSTS_PER_PAGE
+    postsPerPage: POSTS_PER_PAGE,
   };
 
   // Reset filters when no results
@@ -60,7 +60,13 @@ function BlogPageContent() {
                 <p className="text-gray-700 font-semibold text-lg">
                   {totalPosts} result{totalPosts !== 1 ? 's' : ''} found
                   {selectedCategory !== 'All' && (
-                    <span> in <span className="text-violet-600 font-bold">{selectedCategory}</span></span>
+                    <span>
+                      {' '}
+                      in{' '}
+                      <span className="text-violet-600 font-bold">
+                        {selectedCategory}
+                      </span>
+                    </span>
                   )}
                 </p>
               </div>
@@ -71,8 +77,8 @@ function BlogPageContent() {
         {/* Blog Posts */}
         {currentPosts.length > 0 ? (
           <>
-            <EditorialSection 
-              posts={currentPosts} 
+            <EditorialSection
+              posts={currentPosts}
               title="LATEST ARTICLES"
               subtitle="Discover exceptional real estate insights, market analysis, and luxury property features curated by our team of industry experts."
             />
@@ -112,21 +118,31 @@ function BlogPageContent() {
                   </div>
                   <div className="absolute -top-2 -right-2 w-8 h-8 bg-gradient-to-r from-violet-400 to-purple-500 rounded-full opacity-20 animate-pulse"></div>
                 </div>
-                
+
                 <h3 className="text-3xl font-light text-gray-900 mb-4">
                   No articles found
                 </h3>
                 <p className="text-xl text-gray-600 mb-12 font-light max-w-md mx-auto">
                   Try adjusting your search terms or explore all categories.
                 </p>
-                
+
                 <button
                   onClick={resetFilters}
                   className="inline-flex items-center px-8 py-4 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-bold text-lg rounded-full hover:shadow-xl transition-all duration-300 hover:scale-105"
                 >
                   <span>Clear All Filters</span>
-                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                  <svg
+                    className="w-5 h-5 ml-2"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
+                    />
                   </svg>
                 </button>
               </div>
@@ -140,14 +156,16 @@ function BlogPageContent() {
 
 export default function BlogPage() {
   return (
-    <Suspense fallback={
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-violet-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading blog...</p>
+    <Suspense
+      fallback={
+        <div className="min-h-screen bg-white flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-violet-600 mx-auto"></div>
+            <p className="mt-4 text-gray-600">Loading blog...</p>
+          </div>
         </div>
-      </div>
-    }>
+      }
+    >
       <BlogPageContent />
     </Suspense>
   );

@@ -1,222 +1,222 @@
 [
-    {
-      "id": "1",
-      "title": "Top 5 Real Estate Trends Shaping 2025",
-      "excerpt": "Discover the latest trends transforming the real estate market, from sustainable homes to smart technology integration that's revolutionizing how we buy and sell properties.",
-      "image": "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Sarah Johnson",
-      "date": "2025-01-15",
-      "tags": ["Market Trends", "Technology", "Sustainability"],
-      "category": "Market Analysis"
-    },
-    {
-      "id": "2",
-      "title": "First-Time Home Buyer's Complete Guide",
-      "excerpt": "Navigate the complex world of home buying with confidence. Learn essential tips, financing options, and common pitfalls to avoid in your property purchase journey.",
-      "image": "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Michael Chen",
-      "date": "2025-01-12",
-      "tags": ["Home Buying", "Finance", "Tips"],
-      "category": "Buyer's Guide"
-    },
-    {
-      "id": "3",
-      "title": "Luxury Market Analysis: Q4 2024 Report",
-      "excerpt": "Comprehensive analysis of the luxury real estate market performance, including price trends, inventory levels, and projections for the coming year.",
-      "image": "https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "David Rodriguez",
-      "date": "2025-01-10",
-      "tags": ["Luxury", "Market Report", "Analytics"],
-      "category": "Market Analysis"
-    },
-    {
-      "id": "4",
-      "title": "Smart Home Features That Add Value",
-      "excerpt": "Explore the latest smart home technologies that not only enhance your living experience but also significantly increase your property's market value.",
-      "image": "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Emma Wilson",
-      "date": "2025-01-08",
-      "tags": ["Smart Home", "Technology", "Property Value"],
-      "category": "Property Tips"
-    },
-    {
-      "id": "5",
-      "title": "Investment Properties: ROI Maximization Strategies",
-      "excerpt": "Learn proven strategies to maximize returns on your real estate investments, including market timing, property selection, and rental optimization techniques.",
-      "image": "https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Robert Thompson",
-      "date": "2025-01-05",
-      "tags": ["Investment", "ROI", "Strategy"],
-      "category": "Investment"
-    },
-    {
-      "id": "6",
-      "title": "Sustainable Building Materials Revolutionizing Construction",
-      "excerpt": "Discover eco-friendly building materials that are transforming modern construction, reducing environmental impact while maintaining aesthetic appeal and durability.",
-      "image": "https://images.pexels.com/photos/2098427/pexels-photo-2098427.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Lisa Park",
-      "date": "2025-01-03",
-      "tags": ["Sustainability", "Construction", "Green Building"],
-      "category": "Sustainability"
-    },
-    {
-      "id": "7",
-      "title": "Urban vs Suburban: Migration Patterns Post-2024",
-      "excerpt": "Analyze the shifting demographics and preferences driving residential migration patterns between urban centers and suburban communities in the modern era.",
-      "image": "https://images.pexels.com/photos/1370704/pexels-photo-1370704.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "James Mitchell",
-      "date": "2025-01-01",
-      "tags": ["Demographics", "Urban Planning", "Migration"],
-      "category": "Market Analysis"
-    },
-    {
-      "id": "8",
-      "title": "Home Staging Secrets That Sell Properties Fast",
-      "excerpt": "Professional home staging techniques that help properties sell faster and for higher prices, including budget-friendly DIY tips and professional insights.",
-      "image": "https://images.pexels.com/photos/1475938/pexels-photo-1475938.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Amanda Foster",
-      "date": "2024-12-28",
-      "tags": ["Home Staging", "Selling Tips", "Interior Design"],
-      "category": "Seller's Guide"
-    },
-    {
-      "id": "9",
-      "title": "Commercial Real Estate: Office Space Evolution",
-      "excerpt": "How the commercial real estate landscape is adapting to remote work trends, flexible office solutions, and changing business space requirements.",
-      "image": "https://images.pexels.com/photos/2244746/pexels-photo-2244746.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Thomas Anderson",
-      "date": "2024-12-25",
-      "tags": ["Commercial", "Office Space", "Remote Work"],
-      "category": "Commercial"
-    },
-    {
-      "id": "10",
-      "title": "Property Tax Optimization for Homeowners",
-      "excerpt": "Strategic approaches to managing property tax assessments, understanding exemptions, and legally minimizing your annual property tax burden.",
-      "image": "https://images.pexels.com/photos/6863183/pexels-photo-6863183.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Jennifer Lopez",
-      "date": "2024-12-22",
-      "tags": ["Property Tax", "Finance", "Legal"],
-      "category": "Finance"
-    },
-    {
-      "id": "11",
-      "title": "Real Estate Photography: Capturing the Perfect Shot",
-      "excerpt": "Professional photography techniques and equipment recommendations for showcasing properties in their best light, both indoors and outdoors.",
-      "image": "https://images.pexels.com/photos/7031413/pexels-photo-7031413.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Kevin Zhang",
-      "date": "2024-12-20",
-      "tags": ["Photography", "Marketing", "Visual Content"],
-      "category": "Marketing"
-    },
-    {
-      "id": "12",
-      "title": "Mortgage Rate Predictions and Market Impact",
-      "excerpt": "Expert analysis of mortgage rate trends, Federal Reserve policies, and their implications for both buyers and sellers in the current market.",
-      "image": "https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Rachel Green",
-      "date": "2024-12-18",
-      "tags": ["Mortgage", "Interest Rates", "Market Analysis"],
-      "category": "Finance"
-    },
-    {
-      "id": "13",
-      "title": "Neighborhood Analysis: Finding the Perfect Location",
-      "excerpt": "Comprehensive guide to evaluating neighborhoods, including school districts, amenities, crime rates, and future development plans for informed decisions.",
-      "image": "https://images.pexels.com/photos/1438761/pexels-photo-1438761.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Mark Davis",
-      "date": "2024-12-15",
-      "tags": ["Location", "Neighborhood", "Research"],
-      "category": "Buyer's Guide"
-    },
-    {
-      "id": "14",
-      "title": "Energy Efficiency Upgrades That Pay Off",
-      "excerpt": "Cost-effective home improvements that reduce energy bills, increase property value, and qualify for government rebates and tax incentives.",
-      "image": "https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Patricia Martinez",
-      "date": "2024-12-12",
-      "tags": ["Energy Efficiency", "Home Improvement", "Sustainability"],
-      "category": "Property Tips"
-    },
-    {
-      "id": "15",
-      "title": "Real Estate Negotiation Tactics for Success",
-      "excerpt": "Master the art of real estate negotiation with proven strategies for both buyers and sellers to secure the best possible deals in any market.",
-      "image": "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Daniel Kim",
-      "date": "2024-12-10",
-      "tags": ["Negotiation", "Strategy", "Deal Making"],
-      "category": "Buyer's Guide"
-    },
-    {
-      "id": "16",
-      "title": "Home Security Systems: Modern Solutions",
-      "excerpt": "Latest advances in home security technology, comparing smart security systems, and their impact on property values and insurance premiums.",
-      "image": "https://images.pexels.com/photos/430208/pexels-photo-430208.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Linda White",
-      "date": "2024-12-08",
-      "tags": ["Security", "Smart Home", "Technology"],
-      "category": "Property Tips"
-    },
-    {
-      "id": "17",
-      "title": "International Real Estate Investment Opportunities",
-      "excerpt": "Explore global real estate markets offering attractive investment opportunities, including regulatory considerations and risk assessment strategies.",
-      "image": "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Carlos Mendez",
-      "date": "2024-12-05",
-      "tags": ["International", "Investment", "Global Markets"],
-      "category": "Investment"
-    },
-    {
-      "id": "18",
-      "title": "Climate Change Impact on Property Values",
-      "excerpt": "Understanding how climate change and extreme weather events are affecting property values, insurance costs, and long-term investment viability.",
-      "image": "https://images.pexels.com/photos/1642125/pexels-photo-1642125.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Dr. Susan Lee",
-      "date": "2024-12-03",
-      "tags": ["Climate Change", "Risk Assessment", "Property Values"],
-      "category": "Market Analysis"
-    },
-    {
-      "id": "19",
-      "title": "Real Estate Crowdfunding: A New Investment Avenue",
-      "excerpt": "Explore the emerging world of real estate crowdfunding platforms, minimum investments, returns, and how to evaluate opportunities effectively.",
-      "image": "https://images.pexels.com/photos/3760091/pexels-photo-3760091.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Jason Taylor",
-      "date": "2024-12-01",
-      "tags": ["Crowdfunding", "Investment", "Technology"],
-      "category": "Investment"
-    },
-    {
-      "id": "20",
-      "title": "Property Management Best Practices for Landlords",
-      "excerpt": "Essential property management strategies for landlords, including tenant screening, maintenance protocols, and legal compliance requirements.",
-      "image": "https://images.pexels.com/photos/3760072/pexels-photo-3760072.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Michelle Brown",
-      "date": "2024-11-28",
-      "tags": ["Property Management", "Landlord", "Rental"],
-      "category": "Property Management"
-    },
-    {
-      "id": "21",
-      "title": "Historic Properties: Preservation and Investment",
-      "excerpt": "Navigate the unique challenges and opportunities of investing in historic properties, including tax incentives, restoration costs, and market value.",
-      "image": "https://images.pexels.com/photos/1438248/pexels-photo-1438248.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Eleanor Hayes",
-      "date": "2024-11-25",
-      "tags": ["Historic Properties", "Preservation", "Investment"],
-      "category": "Investment"
-    },
-    {
-      "id": "22",
-      "title": "Virtual Reality in Real Estate Marketing",
-      "excerpt": "How virtual reality technology is revolutionizing property showcasing, virtual tours, and remote property viewing experiences for modern buyers.",
-      "image": "https://images.pexels.com/photos/8566473/pexels-photo-8566473.jpeg?auto=compress&cs=tinysrgb&w=800",
-      "author": "Alex Rivera",
-      "date": "2024-11-22",
-      "tags": ["Virtual Reality", "Technology", "Marketing"],
-      "category": "Technology"
-    }
-  ]
+  {
+    "id": "1",
+    "title": "Top 5 Real Estate Trends Shaping 2025",
+    "excerpt": "Discover the latest trends transforming the real estate market, from sustainable homes to smart technology integration that's revolutionizing how we buy and sell properties.",
+    "image": "https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Sarah Johnson",
+    "date": "2025-01-15",
+    "tags": ["Market Trends", "Technology", "Sustainability"],
+    "category": "Market Analysis"
+  },
+  {
+    "id": "2",
+    "title": "First-Time Home Buyer's Complete Guide",
+    "excerpt": "Navigate the complex world of home buying with confidence. Learn essential tips, financing options, and common pitfalls to avoid in your property purchase journey.",
+    "image": "https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Michael Chen",
+    "date": "2025-01-12",
+    "tags": ["Home Buying", "Finance", "Tips"],
+    "category": "Buyer's Guide"
+  },
+  {
+    "id": "3",
+    "title": "Luxury Market Analysis: Q4 2024 Report",
+    "excerpt": "Comprehensive analysis of the luxury real estate market performance, including price trends, inventory levels, and projections for the coming year.",
+    "image": "https://images.pexels.com/photos/1732414/pexels-photo-1732414.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "David Rodriguez",
+    "date": "2025-01-10",
+    "tags": ["Luxury", "Market Report", "Analytics"],
+    "category": "Market Analysis"
+  },
+  {
+    "id": "4",
+    "title": "Smart Home Features That Add Value",
+    "excerpt": "Explore the latest smart home technologies that not only enhance your living experience but also significantly increase your property's market value.",
+    "image": "https://images.pexels.com/photos/1571460/pexels-photo-1571460.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Emma Wilson",
+    "date": "2025-01-08",
+    "tags": ["Smart Home", "Technology", "Property Value"],
+    "category": "Property Tips"
+  },
+  {
+    "id": "5",
+    "title": "Investment Properties: ROI Maximization Strategies",
+    "excerpt": "Learn proven strategies to maximize returns on your real estate investments, including market timing, property selection, and rental optimization techniques.",
+    "image": "https://images.pexels.com/photos/3760067/pexels-photo-3760067.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Robert Thompson",
+    "date": "2025-01-05",
+    "tags": ["Investment", "ROI", "Strategy"],
+    "category": "Investment"
+  },
+  {
+    "id": "6",
+    "title": "Sustainable Building Materials Revolutionizing Construction",
+    "excerpt": "Discover eco-friendly building materials that are transforming modern construction, reducing environmental impact while maintaining aesthetic appeal and durability.",
+    "image": "https://images.pexels.com/photos/2098427/pexels-photo-2098427.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Lisa Park",
+    "date": "2025-01-03",
+    "tags": ["Sustainability", "Construction", "Green Building"],
+    "category": "Sustainability"
+  },
+  {
+    "id": "7",
+    "title": "Urban vs Suburban: Migration Patterns Post-2024",
+    "excerpt": "Analyze the shifting demographics and preferences driving residential migration patterns between urban centers and suburban communities in the modern era.",
+    "image": "https://images.pexels.com/photos/1370704/pexels-photo-1370704.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "James Mitchell",
+    "date": "2025-01-01",
+    "tags": ["Demographics", "Urban Planning", "Migration"],
+    "category": "Market Analysis"
+  },
+  {
+    "id": "8",
+    "title": "Home Staging Secrets That Sell Properties Fast",
+    "excerpt": "Professional home staging techniques that help properties sell faster and for higher prices, including budget-friendly DIY tips and professional insights.",
+    "image": "https://images.pexels.com/photos/1475938/pexels-photo-1475938.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Amanda Foster",
+    "date": "2024-12-28",
+    "tags": ["Home Staging", "Selling Tips", "Interior Design"],
+    "category": "Seller's Guide"
+  },
+  {
+    "id": "9",
+    "title": "Commercial Real Estate: Office Space Evolution",
+    "excerpt": "How the commercial real estate landscape is adapting to remote work trends, flexible office solutions, and changing business space requirements.",
+    "image": "https://images.pexels.com/photos/2244746/pexels-photo-2244746.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Thomas Anderson",
+    "date": "2024-12-25",
+    "tags": ["Commercial", "Office Space", "Remote Work"],
+    "category": "Commercial"
+  },
+  {
+    "id": "10",
+    "title": "Property Tax Optimization for Homeowners",
+    "excerpt": "Strategic approaches to managing property tax assessments, understanding exemptions, and legally minimizing your annual property tax burden.",
+    "image": "https://images.pexels.com/photos/6863183/pexels-photo-6863183.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Jennifer Lopez",
+    "date": "2024-12-22",
+    "tags": ["Property Tax", "Finance", "Legal"],
+    "category": "Finance"
+  },
+  {
+    "id": "11",
+    "title": "Real Estate Photography: Capturing the Perfect Shot",
+    "excerpt": "Professional photography techniques and equipment recommendations for showcasing properties in their best light, both indoors and outdoors.",
+    "image": "https://images.pexels.com/photos/7031413/pexels-photo-7031413.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Kevin Zhang",
+    "date": "2024-12-20",
+    "tags": ["Photography", "Marketing", "Visual Content"],
+    "category": "Marketing"
+  },
+  {
+    "id": "12",
+    "title": "Mortgage Rate Predictions and Market Impact",
+    "excerpt": "Expert analysis of mortgage rate trends, Federal Reserve policies, and their implications for both buyers and sellers in the current market.",
+    "image": "https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Rachel Green",
+    "date": "2024-12-18",
+    "tags": ["Mortgage", "Interest Rates", "Market Analysis"],
+    "category": "Finance"
+  },
+  {
+    "id": "13",
+    "title": "Neighborhood Analysis: Finding the Perfect Location",
+    "excerpt": "Comprehensive guide to evaluating neighborhoods, including school districts, amenities, crime rates, and future development plans for informed decisions.",
+    "image": "https://images.pexels.com/photos/1438761/pexels-photo-1438761.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Mark Davis",
+    "date": "2024-12-15",
+    "tags": ["Location", "Neighborhood", "Research"],
+    "category": "Buyer's Guide"
+  },
+  {
+    "id": "14",
+    "title": "Energy Efficiency Upgrades That Pay Off",
+    "excerpt": "Cost-effective home improvements that reduce energy bills, increase property value, and qualify for government rebates and tax incentives.",
+    "image": "https://images.pexels.com/photos/2724749/pexels-photo-2724749.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Patricia Martinez",
+    "date": "2024-12-12",
+    "tags": ["Energy Efficiency", "Home Improvement", "Sustainability"],
+    "category": "Property Tips"
+  },
+  {
+    "id": "15",
+    "title": "Real Estate Negotiation Tactics for Success",
+    "excerpt": "Master the art of real estate negotiation with proven strategies for both buyers and sellers to secure the best possible deals in any market.",
+    "image": "https://images.pexels.com/photos/3760263/pexels-photo-3760263.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Daniel Kim",
+    "date": "2024-12-10",
+    "tags": ["Negotiation", "Strategy", "Deal Making"],
+    "category": "Buyer's Guide"
+  },
+  {
+    "id": "16",
+    "title": "Home Security Systems: Modern Solutions",
+    "excerpt": "Latest advances in home security technology, comparing smart security systems, and their impact on property values and insurance premiums.",
+    "image": "https://images.pexels.com/photos/430208/pexels-photo-430208.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Linda White",
+    "date": "2024-12-08",
+    "tags": ["Security", "Smart Home", "Technology"],
+    "category": "Property Tips"
+  },
+  {
+    "id": "17",
+    "title": "International Real Estate Investment Opportunities",
+    "excerpt": "Explore global real estate markets offering attractive investment opportunities, including regulatory considerations and risk assessment strategies.",
+    "image": "https://images.pexels.com/photos/2635038/pexels-photo-2635038.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Carlos Mendez",
+    "date": "2024-12-05",
+    "tags": ["International", "Investment", "Global Markets"],
+    "category": "Investment"
+  },
+  {
+    "id": "18",
+    "title": "Climate Change Impact on Property Values",
+    "excerpt": "Understanding how climate change and extreme weather events are affecting property values, insurance costs, and long-term investment viability.",
+    "image": "https://images.pexels.com/photos/1642125/pexels-photo-1642125.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Dr. Susan Lee",
+    "date": "2024-12-03",
+    "tags": ["Climate Change", "Risk Assessment", "Property Values"],
+    "category": "Market Analysis"
+  },
+  {
+    "id": "19",
+    "title": "Real Estate Crowdfunding: A New Investment Avenue",
+    "excerpt": "Explore the emerging world of real estate crowdfunding platforms, minimum investments, returns, and how to evaluate opportunities effectively.",
+    "image": "https://images.pexels.com/photos/3760091/pexels-photo-3760091.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Jason Taylor",
+    "date": "2024-12-01",
+    "tags": ["Crowdfunding", "Investment", "Technology"],
+    "category": "Investment"
+  },
+  {
+    "id": "20",
+    "title": "Property Management Best Practices for Landlords",
+    "excerpt": "Essential property management strategies for landlords, including tenant screening, maintenance protocols, and legal compliance requirements.",
+    "image": "https://images.pexels.com/photos/3760072/pexels-photo-3760072.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Michelle Brown",
+    "date": "2024-11-28",
+    "tags": ["Property Management", "Landlord", "Rental"],
+    "category": "Property Management"
+  },
+  {
+    "id": "21",
+    "title": "Historic Properties: Preservation and Investment",
+    "excerpt": "Navigate the unique challenges and opportunities of investing in historic properties, including tax incentives, restoration costs, and market value.",
+    "image": "https://images.pexels.com/photos/1438248/pexels-photo-1438248.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Eleanor Hayes",
+    "date": "2024-11-25",
+    "tags": ["Historic Properties", "Preservation", "Investment"],
+    "category": "Investment"
+  },
+  {
+    "id": "22",
+    "title": "Virtual Reality in Real Estate Marketing",
+    "excerpt": "How virtual reality technology is revolutionizing property showcasing, virtual tours, and remote property viewing experiences for modern buyers.",
+    "image": "https://images.pexels.com/photos/8566473/pexels-photo-8566473.jpeg?auto=compress&cs=tinysrgb&w=800",
+    "author": "Alex Rivera",
+    "date": "2024-11-22",
+    "tags": ["Virtual Reality", "Technology", "Marketing"],
+    "category": "Technology"
+  }
+]

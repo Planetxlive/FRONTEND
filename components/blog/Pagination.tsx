@@ -9,23 +9,26 @@ interface PaginationProps {
   baseUrl?: string;
 }
 
-export default function Pagination({ paginationInfo, baseUrl = '/blog' }: PaginationProps) {
+export default function Pagination({
+  paginationInfo,
+  baseUrl = '/blog',
+}: PaginationProps) {
   const { currentPage, totalPages } = paginationInfo;
-  
+
   const getPageNumbers = () => {
     const pages = [];
     const showPages = 5;
     let startPage = Math.max(1, currentPage - Math.floor(showPages / 2));
     const endPage = Math.min(totalPages, startPage + showPages - 1);
-    
+
     if (endPage - startPage + 1 < showPages) {
       startPage = Math.max(1, endPage - showPages + 1);
     }
-    
+
     for (let i = startPage; i <= endPage; i++) {
       pages.push(i);
     }
-    
+
     return pages;
   };
 
@@ -37,7 +40,10 @@ export default function Pagination({ paginationInfo, baseUrl = '/blog' }: Pagina
   if (totalPages <= 1) return null;
 
   return (
-    <nav className="flex justify-center mt-20 mb-12" aria-label="Blog pagination">
+    <nav
+      className="flex justify-center mt-20 mb-12"
+      aria-label="Blog pagination"
+    >
       <div className="flex items-center space-x-2 bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-2 border border-gray-200/50">
         {/* Previous Button */}
         {currentPage > 1 ? (
@@ -56,7 +62,7 @@ export default function Pagination({ paginationInfo, baseUrl = '/blog' }: Pagina
 
         {/* Page Numbers */}
         <div className="flex items-center space-x-1">
-          {getPageNumbers().map((page) => (
+          {getPageNumbers().map(page => (
             <Link
               key={page}
               href={getPageUrl(page)}

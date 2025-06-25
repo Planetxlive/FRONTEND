@@ -9,10 +9,10 @@ interface EnhancedCategoryFilterProps {
   onCategoryChange: (category: string) => void;
 }
 
-export default function EnhancedCategoryFilter({ 
-  categories, 
-  selectedCategory, 
-  onCategoryChange 
+export default function EnhancedCategoryFilter({
+  categories,
+  selectedCategory,
+  onCategoryChange,
 }: EnhancedCategoryFilterProps) {
   const [isOpen, setIsOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
@@ -25,7 +25,10 @@ export default function EnhancedCategoryFilter({
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
         setIsOpen(false);
       }
     };
@@ -48,10 +51,12 @@ export default function EnhancedCategoryFilter({
           <div className="text-center mb-8">
             <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg border border-gray-200/50">
               <Sparkles className="w-5 h-5 text-violet-500" />
-              <span className="text-gray-700 font-semibold text-sm tracking-wider uppercase">Explore Categories</span>
+              <span className="text-gray-700 font-semibold text-sm tracking-wider uppercase">
+                Explore Categories
+              </span>
             </div>
           </div>
-          
+
           {/* Grid Layout - No Horizontal Scrolling */}
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-3 max-w-6xl mx-auto">
             <button
@@ -68,26 +73,26 @@ export default function EnhancedCategoryFilter({
               {selectedCategory === 'All' && (
                 <div className="absolute inset-0 bg-gradient-to-r from-violet-500 to-purple-600"></div>
               )}
-              
+
               {/* Hover Background */}
               {hoveredCategory === 'All' && selectedCategory !== 'All' && (
                 <div className="absolute inset-0 bg-gradient-to-r from-violet-100 to-purple-100"></div>
               )}
-              
+
               {/* Shimmer Effect */}
               {selectedCategory === 'All' && (
                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
               )}
-              
+
               <span className="relative z-10 text-xs">ALL</span>
-              
+
               {/* Active Indicator */}
               {selectedCategory === 'All' && (
                 <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-white rounded-full shadow-lg"></div>
               )}
             </button>
 
-            {categories.map((category) => (
+            {categories.map(category => (
               <button
                 key={category}
                 onClick={() => onCategoryChange(category)}
@@ -103,19 +108,22 @@ export default function EnhancedCategoryFilter({
                 {selectedCategory === category && (
                   <div className="absolute inset-0 bg-gradient-to-r from-violet-100 to-purple-100 border-2 border-violet-300"></div>
                 )}
-                
+
                 {/* Hover Background */}
-                {hoveredCategory === category && selectedCategory !== category && (
-                  <div className="absolute inset-0 bg-gradient-to-r from-gray-100 to-gray-200"></div>
-                )}
-                
+                {hoveredCategory === category &&
+                  selectedCategory !== category && (
+                    <div className="absolute inset-0 bg-gradient-to-r from-gray-100 to-gray-200"></div>
+                  )}
+
                 {/* Shimmer Effect for Active */}
                 {selectedCategory === category && (
                   <div className="absolute inset-0 bg-gradient-to-r from-transparent via-violet-300/30 to-transparent animate-shimmer"></div>
                 )}
-                
-                <span className="relative z-10 text-xs truncate">{category.replace(/\s+/g, ' ').toUpperCase()}</span>
-                
+
+                <span className="relative z-10 text-xs truncate">
+                  {category.replace(/\s+/g, ' ').toUpperCase()}
+                </span>
+
                 {/* Active Indicator */}
                 {selectedCategory === category && (
                   <div className="absolute bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-violet-500 rounded-full shadow-lg animate-pulse"></div>
@@ -130,22 +138,32 @@ export default function EnhancedCategoryFilter({
           <div className="text-center mb-6">
             <div className="inline-flex items-center space-x-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-gray-200/50">
               <Sparkles className="w-4 h-4 text-violet-500" />
-              <span className="text-gray-700 font-medium text-sm">Filter Articles</span>
+              <span className="text-gray-700 font-medium text-sm">
+                Filter Articles
+              </span>
             </div>
           </div>
-          
+
           <div className="relative">
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="w-full flex items-center justify-between px-6 py-5 bg-white/80 backdrop-blur-sm border-2 border-gray-200 rounded-2xl text-left transition-all duration-300 hover:border-violet-300 focus:border-violet-400 focus:bg-white shadow-lg"
             >
               <div className="flex items-center space-x-3">
-                <span className="text-sm font-medium text-gray-600">Category:</span>
-                <span className={`font-bold ${selectedCategory === 'All' ? 'text-gray-900' : 'text-violet-600'}`}>
-                  {selectedCategory === 'All' ? 'All Articles' : selectedCategory}
+                <span className="text-sm font-medium text-gray-600">
+                  Category:
+                </span>
+                <span
+                  className={`font-bold ${selectedCategory === 'All' ? 'text-gray-900' : 'text-violet-600'}`}
+                >
+                  {selectedCategory === 'All'
+                    ? 'All Articles'
+                    : selectedCategory}
                 </span>
               </div>
-              <ChevronDown className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${isOpen ? 'rotate-180 text-violet-500' : ''}`} />
+              <ChevronDown
+                className={`w-5 h-5 text-gray-500 transition-transform duration-300 ${isOpen ? 'rotate-180 text-violet-500' : ''}`}
+              />
             </button>
 
             {/* Enhanced Dropdown Menu */}
@@ -157,7 +175,7 @@ export default function EnhancedCategoryFilter({
                     <input
                       type="text"
                       value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
+                      onChange={e => setSearchTerm(e.target.value)}
                       placeholder="Search categories..."
                       className="w-full px-4 py-3 bg-white border-2 border-gray-200 rounded-xl text-sm focus:outline-none focus:border-violet-400 transition-all duration-200 shadow-sm"
                     />
@@ -191,7 +209,7 @@ export default function EnhancedCategoryFilter({
                     )}
                   </button>
 
-                  {filteredCategories.map((category) => (
+                  {filteredCategories.map(category => (
                     <button
                       key={category}
                       onClick={() => handleCategorySelect(category)}

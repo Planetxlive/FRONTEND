@@ -18,11 +18,11 @@ const Loader = () => {
       </ul>
     </StyledWrapper>
   );
-}
+};
 
 const StyledWrapper = styled.div`
   .wave-menu {
-    border: 4px solid #545FE5;
+    border: 4px solid #545fe5;
     border-radius: 50px;
     width: 200px;
     height: 45px;
@@ -42,7 +42,7 @@ const StyledWrapper = styled.div`
     height: 30px;
     width: 4px;
     border-radius: 10px;
-    background: #545FE5;
+    background: #545fe5;
     margin: 0 6px;
     padding: 0;
     animation-name: wave1;
@@ -57,7 +57,7 @@ const StyledWrapper = styled.div`
   }
 
   .wave-menu:hover {
-    background: #545FE5;
+    background: #545fe5;
   }
 
   .wave-menu li:nth-child(2) {
@@ -135,6 +135,7 @@ const StyledWrapper = styled.div`
     to {
       transform: scaleY(0.5);
     }
-  }`;
+  }
+`;
 
 export default Loader;

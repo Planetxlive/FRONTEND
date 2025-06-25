@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Menu, Home, Download, Heart, User } from 'lucide-react';
@@ -244,13 +244,11 @@ export default function Navbar() {
               <div className="flex items-center space-x-2">
                 <button
                   onClick={async () => {
-                  
-                      if (isSignedIn) {
-                        await router.push('/profile');
-                      } else {
-                        setIsSignInModalOpen(true);
-                      }
-                    
+                    if (isSignedIn) {
+                      await router.push('/profile');
+                    } else {
+                      setIsSignInModalOpen(true);
+                    }
                   }}
                   className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r cursor-pointer from-purple-500 to-blue-500 rounded-full flex items-center justify-center"
                 >
