@@ -8,6 +8,8 @@ export interface BlogPost {
   tags: string[];
   category: string;
   content: string;
+  location?: string;
+  contactInfo?: string;
 }
 
 export interface PaginationInfo {
