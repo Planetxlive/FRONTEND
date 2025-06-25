@@ -1,7 +1,7 @@
 'use client';
 
 import { ChangeEvent, useEffect, useState } from 'react';
-import { Menu, Home, Download, Heart, User } from 'lucide-react';
+import { Menu, Download, Heart, User, Building2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import useAuth from '@/hooks/auth/useAuth';
 import { Modal } from './ui/modal';
@@ -87,8 +87,8 @@ export default function Navbar() {
               onClick={() => router.push('/')}
               className="flex items-center space-x-2 cursor-pointer"
             >
-              <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
-                <Home className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+              <div className="w-7 h-7 sm:w-8 sm:h-8  rounded-lg flex items-center justify-center">
+                <Building2 className="w-4 h-4 sm:w-5 sm:h-5 text-black" />
               </div>
               <span
                 className={`text-lg sm:text-xl font-bold transition-colors duration-300 ${
