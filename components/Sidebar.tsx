@@ -21,6 +21,7 @@ import useAuth from '@/hooks/auth/useAuth';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -28,6 +29,7 @@ interface SidebarProps {
 }
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
+  const router = useRouter();
   const { isSignedIn } = useAuth();
   const { signOut } = useSignOut();
   const user = useSelector((state: RootState) => state.user.user);
@@ -81,11 +83,12 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                         </h3>
                         <p className="text-sm text-gray-600">{user?.mobile}</p>
                       </div>
-                      <Link href="/user-profile">
+                      <Link href="/profile">
                         <Button
                           variant="ghost"
                           size="sm"
                           className="rounded-full"
+                          onClick={onClose}
                         >
                           <Eye className="w-4 h-4" />
                         </Button>
@@ -175,17 +178,26 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
             {/* Menu Items */}
             <div className="p-6 space-y-2">
-              <div className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors">
+              <div
+                onClick={() => router.push('/blog')}
+                className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors"
+              >
                 <Diamond className="w-5 h-5 text-gray-600" />
-                <span className="text-gray-700">Zero Brokerage Properties</span>
+                <span className="text-gray-700">Blogs</span>
               </div>
 
-              <div className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors">
+              <div
+                onClick={onClose}
+                className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors"
+              >
                 <FileText className="w-5 h-5 text-gray-600" />
                 <span className="text-gray-700">My Transactions</span>
               </div>
 
-              <div className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors">
+              <div
+                onClick={onClose}
+                className="flex items-center justify-between p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors"
+              >
                 <div className="flex items-center space-x-3">
                   <Star className="w-5 h-5 text-gray-600" />
                   <span className="text-gray-700">My Reviews</span>
@@ -195,17 +207,26 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 </span>
               </div>
 
-              <div className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors">
+              <div
+                onClick={onClose}
+                className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors"
+              >
                 <CreditCard className="w-5 h-5 text-gray-600" />
                 <span className="text-gray-700">Payment History</span>
               </div>
 
-              <div className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors">
+              <div
+                onClick={onClose}
+                className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors"
+              >
                 <Settings className="w-5 h-5 text-gray-600" />
                 <span className="text-gray-700">Settings</span>
               </div>
 
-              <div className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors">
+              <div
+                onClick={onClose}
+                className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors"
+              >
                 <HelpCircle className="w-5 h-5 text-gray-600" />
                 <span className="text-gray-700">Help & Support</span>
               </div>

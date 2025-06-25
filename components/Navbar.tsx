@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { ChangeEvent, useEffect, useState } from 'react';
 import { Menu, Home, Download, Heart, User } from 'lucide-react';
@@ -13,8 +13,10 @@ import getUser from '@/app/api/user/getUser';
 import { useDispatch } from 'react-redux';
 import { setUser } from '@/app/store/features/user/userSlice';
 import Sidebar from './Sidebar';
+import { useRouter } from 'next/navigation';
 
 export default function Navbar() {
+  const router = useRouter();
   const { isSignedIn, getToken } = useAuth();
   const [isSignUpModalOpen, setIsSignUpModalOpen] = useState<boolean>(false);
   const [isSignInModalOpen, setIsSignInModalOpen] = useState<boolean>(false);
@@ -81,7 +83,10 @@ export default function Navbar() {
         >
           <div className="flex items-center justify-between h-14 sm:h-16">
             {/* Logo */}
-            <div className="flex items-center space-x-2">
+            <div
+              onClick={() => router.push('/')}
+              className="flex items-center space-x-2 cursor-pointer"
+            >
               <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
                 <Home className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
               </div>
@@ -156,9 +161,18 @@ export default function Navbar() {
               )}
               {/* Profile & Menu Button */}
               <div className="flex items-center space-x-2">
-                <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
+                <button
+                  onClick={async () => {
+                    if (isSignedIn) {
+                      await router.push('/profile');
+                    } else {
+                      setIsSignInModalOpen(true);
+                    }
+                  }}
+                  className="w-8 h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center"
+                >
                   <User className="w-4 h-4 text-white" />
-                </div>
+                </button>
                 <Button
                   variant="ghost"
                   size="sm"
@@ -228,9 +242,20 @@ export default function Navbar() {
 
               {/* Profile & Menu */}
               <div className="flex items-center space-x-2">
-                <div className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r from-purple-500 to-blue-500 rounded-full flex items-center justify-center">
+                <button
+                  onClick={async () => {
+                  
+                      if (isSignedIn) {
+                        await router.push('/profile');
+                      } else {
+                        setIsSignInModalOpen(true);
+                      }
+                    
+                  }}
+                  className="w-7 h-7 sm:w-8 sm:h-8 bg-gradient-to-r cursor-pointer from-purple-500 to-blue-500 rounded-full flex items-center justify-center"
+                >
                   <User className="w-3 h-3 sm:w-4 sm:h-4 text-white" />
-                </div>
+                </button>
                 <Button
                   variant="ghost"
                   size="sm"
