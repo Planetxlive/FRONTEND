@@ -4,8 +4,9 @@ import { useState, useMemo, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import EditorialSection from '@/components/blog/EditorialSection';
 import Pagination from '@/components/blog/Pagination';
-import { BlogPost, PaginationInfo } from '@/types/blog';
-import postsData from '@/data/post.json';
+import { PaginationInfo } from '@/types/blog';
+import { useSelector } from 'react-redux';
+import { RootState } from '../store/store';
 
 const POSTS_PER_PAGE = 9;
 
@@ -13,20 +14,21 @@ function BlogPageContent() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const searchParams = useSearchParams();
   const router = useRouter();
+  const data = useSelector((state: RootState) => state.blogs.blogs);
 
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
 
   // Filter posts based on category
   const filteredPosts = useMemo(() => {
-    let filtered = postsData as BlogPost[];
+    let filtered = data || [];
 
     // Filter by category
-    if (selectedCategory !== 'All') {
+    if (selectedCategory !== 'All' && filtered) {
       filtered = filtered.filter(post => post.category === selectedCategory);
     }
 
     return filtered;
-  }, [selectedCategory]);
+  }, [selectedCategory, data]);
 
   // Pagination calculations
   const totalPosts = filteredPosts.length;
