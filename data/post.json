@@ -8,7 +8,9 @@
     "date": "2025-01-15",
     "tags": ["Market Trends", "Technology", "Sustainability"],
     "category": "Market Analysis",
-    "content": "## Real Estate Trends for 2025\n\n- **Sustainable Homes** are on the rise.\n- Smart technology is revolutionizing the market.\n\n> The future is green and smart!\n\n[Learn more](https://www.example.com)"
+    "content": "## Real Estate Trends for 2025\n\n- **Sustainable Homes** are on the rise.\n- Smart technology is revolutionizing the market.\n\n> The future is green and smart!\n\n[Learn more](https://www.example.com)",
+    "location": "New York, NY",
+    "contactInfo": "contact@realestate.com"
   },
   {
     "id": "2",
@@ -19,7 +21,9 @@
     "date": "2025-01-12",
     "tags": ["Home Buying", "Finance", "Tips"],
     "category": "Buyer's Guide",
-    "content": "# Home Buying Guide\n\n1. Get pre-approved for a mortgage.\n2. Research neighborhoods.\n3. Work with a trusted agent.\n\n**Tip:** Avoid common pitfalls!"
+    "content": "# Home Buying Guide\n\n1. Get pre-approved for a mortgage.\n2. Research neighborhoods.\n3. Work with a trusted agent.\n\n**Tip:** Avoid common pitfalls!",
+    "location": "San Francisco, CA",
+    "contactInfo": "michael.chen@homes.com"
   },
   {
     "id": "3",
@@ -30,7 +34,9 @@
     "date": "2025-01-10",
     "tags": ["Luxury", "Market Report", "Analytics"],
     "category": "Market Analysis",
-    "content": "### Q4 2024 Luxury Market\n\n- Price trends are stable.\n- Inventory is limited.\n- Projections are optimistic."
+    "content": "### Q4 2024 Luxury Market\n\n- Price trends are stable.\n- Inventory is limited.\n- Projections are optimistic.",
+    "location": "Miami, FL",
+    "contactInfo": "david@luxuryreports.com"
   },
   {
     "id": "4",
@@ -41,7 +47,9 @@
     "date": "2025-01-08",
     "tags": ["Smart Home", "Technology", "Property Value"],
     "category": "Property Tips",
-    "content": "## Smart Home Features\n\n- Automated lighting\n- Smart thermostats\n- Security systems\n\n*Increase your property value!*"
+    "content": "## Smart Home Features\n\n- Automated lighting\n- Smart thermostats\n- Security systems\n\n*Increase your property value!*",
+    "location": "Austin, TX",
+    "contactInfo": "emma@smarthomes.com"
   },
   {
     "id": "5",
@@ -52,7 +60,9 @@
     "date": "2025-01-05",
     "tags": ["Investment", "ROI", "Strategy"],
     "category": "Investment",
-    "content": "### ROI Maximization\n\n- Market timing\n- Property selection\n- Rental optimization"
+    "content": "### ROI Maximization\n\n- Market timing\n- Property selection\n- Rental optimization",
+    "location": "Chicago, IL",
+    "contactInfo": "robert.thompson@investmentproperties.com"
   },
   {
     "id": "6",
@@ -63,7 +73,9 @@
     "date": "2025-01-03",
     "tags": ["Sustainability", "Construction", "Green Building"],
     "category": "Sustainability",
-    "content": "## Eco-Friendly Materials\n\n- Bamboo\n- Recycled steel\n- Insulated concrete forms"
+    "content": "## Eco-Friendly Materials\n\n- Bamboo\n- Recycled steel\n- Insulated concrete forms",
+    "location": "Seattle, WA",
+    "contactInfo": "lisa.park@sustainableconstruction.com"
   },
   {
     "id": "7",
@@ -74,7 +86,9 @@
     "date": "2025-01-01",
     "tags": ["Demographics", "Urban Planning", "Migration"],
     "category": "Market Analysis",
-    "content": "### Migration Patterns\n\n- Urban to suburban shift\n- Changing preferences\n- Demographic trends"
+    "content": "### Migration Patterns\n\n- Urban to suburban shift\n- Changing preferences\n- Demographic trends",
+    "location": "Boston, MA",
+    "contactInfo": "james.mitchell@urbanplanning.com"
   },
   {
     "id": "8",
@@ -85,7 +99,9 @@
     "date": "2024-12-28",
     "tags": ["Home Staging", "Selling Tips", "Interior Design"],
     "category": "Seller's Guide",
-    "content": "## Home Staging Tips\n\n- Declutter\n- Neutral colors\n- Add fresh flowers"
+    "content": "## Home Staging Tips\n\n- Declutter\n- Neutral colors\n- Add fresh flowers",
+    "location": "San Diego, CA",
+    "contactInfo": "amanda.foster@homeselling.com"
   },
   {
     "id": "9",
@@ -96,7 +112,9 @@
     "date": "2024-12-25",
     "tags": ["Commercial", "Office Space", "Remote Work"],
     "category": "Commercial",
-    "content": "### Office Space Evolution\n\n- Remote work\n- Flexible solutions\n- New requirements"
+    "content": "### Office Space Evolution\n\n- Remote work\n- Flexible solutions\n- New requirements",
+    "location": "New York, NY",
+    "contactInfo": "thomas.anderson@commercialrealestate.com"
   },
   {
     "id": "10",
@@ -107,7 +125,9 @@
     "date": "2024-12-22",
     "tags": ["Property Tax", "Finance", "Legal"],
     "category": "Finance",
-    "content": "## Property Tax Tips\n\n- Understand exemptions\n- Appeal assessments\n- Minimize your burden"
+    "content": "## Property Tax Tips\n\n- Understand exemptions\n- Appeal assessments\n- Minimize your burden",
+    "location": "Miami, FL",
+    "contactInfo": "jennifer.lopez@propertytax.com"
   },
   {
     "id": "11",
@@ -118,7 +138,9 @@
     "date": "2024-12-20",
     "tags": ["Photography", "Marketing", "Visual Content"],
     "category": "Marketing",
-    "content": "## Real Estate Photography\n\n- Use natural light\n- Highlight best features\n- Professional equipment recommended"
+    "content": "## Real Estate Photography\n\n- Use natural light\n- Highlight best features\n- Professional equipment recommended",
+    "location": "San Francisco, CA",
+    "contactInfo": "kevin.zhang@realestatephotography.com"
   },
   {
     "id": "12",
@@ -129,7 +151,9 @@
     "date": "2024-12-18",
     "tags": ["Mortgage", "Interest Rates", "Market Analysis"],
     "category": "Finance",
-    "content": "### Mortgage Rate Trends\n\n- Rates are fluctuating\n- Watch Federal Reserve policies\n- Impact on buyers and sellers"
+    "content": "### Mortgage Rate Trends\n\n- Rates are fluctuating\n- Watch Federal Reserve policies\n- Impact on buyers and sellers",
+    "location": "New York, NY",
+    "contactInfo": "rachel.green@mortgage.com"
   },
   {
     "id": "13",
@@ -140,7 +164,9 @@
     "date": "2024-12-15",
     "tags": ["Location", "Neighborhood", "Research"],
     "category": "Buyer's Guide",
-    "content": "## Neighborhood Analysis\n\n- School districts\n- Amenities\n- Crime rates\n- Future development"
+    "content": "## Neighborhood Analysis\n\n- School districts\n- Amenities\n- Crime rates\n- Future development",
+    "location": "San Diego, CA",
+    "contactInfo": "mark.davis@neighborhoodanalysis.com"
   },
   {
     "id": "14",
@@ -151,7 +177,9 @@
     "date": "2024-12-12",
     "tags": ["Energy Efficiency", "Home Improvement", "Sustainability"],
     "category": "Property Tips",
-    "content": "### Energy Efficiency Upgrades\n\n- Insulation\n- Energy-efficient windows\n- Smart thermostats"
+    "content": "### Energy Efficiency Upgrades\n\n- Insulation\n- Energy-efficient windows\n- Smart thermostats",
+    "location": "Seattle, WA",
+    "contactInfo": "patricia.martinez@energyefficiency.com"
   },
   {
     "id": "15",
@@ -162,7 +190,9 @@
     "date": "2024-12-10",
     "tags": ["Negotiation", "Strategy", "Deal Making"],
     "category": "Buyer's Guide",
-    "content": "## Negotiation Tactics\n\n- Know your limits\n- Be prepared to walk away\n- Understand the market"
+    "content": "## Negotiation Tactics\n\n- Know your limits\n- Be prepared to walk away\n- Understand the market",
+    "location": "New York, NY",
+    "contactInfo": "daniel.kim@realestatenegotiation.com"
   },
   {
     "id": "16",
@@ -173,7 +203,9 @@
     "date": "2024-12-08",
     "tags": ["Security", "Smart Home", "Technology"],
     "category": "Property Tips",
-    "content": "### Home Security\n\n- Smart alarms\n- Video doorbells\n- Insurance benefits"
+    "content": "### Home Security\n\n- Smart alarms\n- Video doorbells\n- Insurance benefits",
+    "location": "San Diego, CA",
+    "contactInfo": "linda.white@homeseurity.com"
   },
   {
     "id": "17",
@@ -184,7 +216,9 @@
     "date": "2024-12-05",
     "tags": ["International", "Investment", "Global Markets"],
     "category": "Investment",
-    "content": "## International Investment\n\n- Regulatory considerations\n- Risk assessment\n- Market opportunities"
+    "content": "## International Investment\n\n- Regulatory considerations\n- Risk assessment\n- Market opportunities",
+    "location": "London, UK",
+    "contactInfo": "carlos.mendez@internationalinvestment.com"
   },
   {
     "id": "18",
@@ -195,7 +229,9 @@
     "date": "2024-12-03",
     "tags": ["Climate Change", "Risk Assessment", "Property Values"],
     "category": "Market Analysis",
-    "content": "### Climate Change Impact\n\n- Property values\n- Insurance costs\n- Investment viability"
+    "content": "### Climate Change Impact\n\n- Property values\n- Insurance costs\n- Investment viability",
+    "location": "Houston, TX",
+    "contactInfo": "susan.lee@propertyvalues.com"
   },
   {
     "id": "19",
@@ -206,7 +242,9 @@
     "date": "2024-12-01",
     "tags": ["Crowdfunding", "Investment", "Technology"],
     "category": "Investment",
-    "content": "## Crowdfunding\n\n- Minimum investments\n- Returns\n- Evaluation tips"
+    "content": "## Crowdfunding\n\n- Minimum investments\n- Returns\n- Evaluation tips",
+    "location": "San Francisco, CA",
+    "contactInfo": "jason.taylor@realestatecrowdfunding.com"
   },
   {
     "id": "20",
@@ -217,7 +255,9 @@
     "date": "2024-11-28",
     "tags": ["Property Management", "Landlord", "Rental"],
     "category": "Property Management",
-    "content": "### Property Management\n\n- Tenant screening\n- Maintenance\n- Legal compliance"
+    "content": "### Property Management\n\n- Tenant screening\n- Maintenance\n- Legal compliance",
+    "location": "New York, NY",
+    "contactInfo": "michelle.brown@propertymanagement.com"
   },
   {
     "id": "21",
@@ -228,7 +268,9 @@
     "date": "2024-11-25",
     "tags": ["Historic Properties", "Preservation", "Investment"],
     "category": "Investment",
-    "content": "## Historic Properties\n\n- Tax incentives\n- Restoration costs\n- Market value"
+    "content": "## Historic Properties\n\n- Tax incentives\n- Restoration costs\n- Market value",
+    "location": "New Orleans, LA",
+    "contactInfo": "eleanor.hayes@historicproperties.com"
   },
   {
     "id": "22",
@@ -239,6 +281,8 @@
     "date": "2024-11-22",
     "tags": ["Virtual Reality", "Technology", "Marketing"],
     "category": "Technology",
-    "content": "## Virtual Reality in Real Estate\n\n- Property showcasing\n- Virtual tours\n- Remote viewing"
+    "content": "## Virtual Reality in Real Estate\n\n- Property showcasing\n- Virtual tours\n- Remote viewing",
+    "location": "San Francisco, CA",
+    "contactInfo": "alex.rivera@virtualreality.com"
   }
 ]

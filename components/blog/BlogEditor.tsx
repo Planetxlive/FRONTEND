@@ -36,6 +36,8 @@ export default function BlogEditor({
     tags: [] as string[],
     category: '',
     content: '',
+    location: '',
+    contactInfo: '',
   });
   const [content, setContent] = useState('');
   const [tagInput, setTagInput] = useState('');
@@ -65,6 +67,8 @@ export default function BlogEditor({
         tags: initialData.tags,
         category: initialData.category,
         content: initialData.content,
+        location: initialData.location || '',
+        contactInfo: initialData.contactInfo || '',
       });
     }
   }, [initialData]);
@@ -109,6 +113,9 @@ export default function BlogEditor({
     if (!formData.image.trim()) newErrors.image = 'Featured image is required';
     if (formData.tags.length === 0)
       newErrors.tags = 'At least one tag is required';
+    if (!formData.location.trim()) newErrors.location = 'Location is required';
+    if (!formData.contactInfo.trim())
+      newErrors.contactInfo = 'Contact info is required';
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -261,6 +268,50 @@ export default function BlogEditor({
                   <p className="text-red-500 text-sm">{errors.tags}</p>
                 )}
               </div>
+            </div>
+
+            {/* Location */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-3">
+                Location
+              </label>
+              <input
+                type="text"
+                value={formData.location}
+                onChange={e => handleInputChange('location', e.target.value)}
+                placeholder="Enter the location..."
+                className={`w-full px-6 py-4 bg-white border-2 rounded-2xl focus:outline-none transition-all duration-200 text-lg font-medium ${
+                  errors.location
+                    ? 'border-red-300 focus:border-red-400'
+                    : 'border-gray-200 focus:border-violet-400'
+                }`}
+              />
+              {errors.location && (
+                <p className="text-red-500 text-sm mt-2">{errors.location}</p>
+              )}
+            </div>
+
+            {/* Contact Info */}
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-3">
+                Contact Info
+              </label>
+              <input
+                type="text"
+                value={formData.contactInfo}
+                onChange={e => handleInputChange('contactInfo', e.target.value)}
+                placeholder="Enter contact information (email, phone, etc.)..."
+                className={`w-full px-6 py-4 bg-white border-2 rounded-2xl focus:outline-none transition-all duration-200 text-lg font-medium ${
+                  errors.contactInfo
+                    ? 'border-red-300 focus:border-red-400'
+                    : 'border-gray-200 focus:border-violet-400'
+                }`}
+              />
+              {errors.contactInfo && (
+                <p className="text-red-500 text-sm mt-2">
+                  {errors.contactInfo}
+                </p>
+              )}
             </div>
           </div>
         </div>
