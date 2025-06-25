@@ -7,12 +7,12 @@ import {
   Heart,
   Search,
   FileText,
-  Diamond,
   CreditCard,
   Star,
   Settings,
   HelpCircle,
   LogOut,
+  Dumbbell,
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -141,39 +141,6 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   <p className="text-lg font-bold text-gray-900 mt-1">12</p>
                 </div>
               </div>
-
-              <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 to-blue-50 rounded-xl border border-purple-200">
-                <div className="text-center">
-                  <div className="w-12 h-12 mx-auto mb-3 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl flex items-center justify-center">
-                    <Home className="w-6 h-6 text-white" />
-                  </div>
-                  <p className="text-sm font-medium text-gray-900 mb-2">
-                    Start new search
-                  </p>
-                  <Button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full hover:shadow-lg transition-all duration-300">
-                    Search Properties
-                  </Button>
-                </div>
-              </div>
-            </div>
-
-            {/* Property Management */}
-            <div className="p-6 border-b border-gray-100">
-              <div className="p-4 bg-gradient-to-r from-yellow-50 to-orange-50 rounded-xl border border-yellow-200">
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-xl flex items-center justify-center">
-                    <Home className="w-5 h-5 text-white" />
-                  </div>
-                  <div className="flex-1">
-                    <p className="text-sm font-medium text-gray-900">
-                      Looking to sell / rent your property?
-                    </p>
-                    <p className="text-xs text-gray-600 mt-1">
-                      Post property for FREE
-                    </p>
-                  </div>
-                </div>
-              </div>
             </div>
 
             {/* Menu Items */}
@@ -185,16 +152,19 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 }}
                 className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors"
               >
-                <Diamond className="w-5 h-5 text-gray-600" />
+                <FileText className="w-5 h-5 text-gray-600" />
                 <span className="text-gray-700">Blogs</span>
               </div>
 
               <div
-                onClick={onClose}
+                onClick={() => {
+                  onClose();
+                  router.push('/gym');
+                }}
                 className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors"
               >
-                <FileText className="w-5 h-5 text-gray-600" />
-                <span className="text-gray-700">My Transactions</span>
+                <Dumbbell className="w-5 h-5 text-gray-600" />
+                <span className="text-gray-700">Gyms</span>
               </div>
 
               <div
