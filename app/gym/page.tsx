@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect, useMemo, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -32,7 +32,7 @@ import gymsData from '@/data/gym.json';
 
 const GYMS_PER_PAGE = 12;
 
-export default function GymPage() {
+function GymPageContent() {
   const [gyms, setGyms] = useState<Gym[]>([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -829,5 +829,13 @@ export default function GymPage() {
         )}
       </main>
     </div>
+  );
+}
+
+export default function GymPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <GymPageContent />
+    </Suspense>
   );
 }
