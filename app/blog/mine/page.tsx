@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import {
   Plus,
@@ -15,37 +15,42 @@ import {
 // import { BlogPost } from '@/types/blog';
 // import postsData from '@/data/post.json';
 import Image from 'next/image';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/app/store/store';
-import { deleteBlog } from '@/app/store/features/blogs/blogsSlice';
+// import { useDispatch, useSelector } from 'react-redux';
+// import { RootState } from '@/app/store/store';
+// import { deleteBlog } from '@/app/store/features/blogs/blogsSlice';
+import { BlogPost } from '@/types/blog';
+import useAuth from '@/hooks/auth/useAuth';
+import getUserBlogs from '@/app/api/blogs/getUserBlogs';
 
 export default function AdminPage() {
   // const [posts, setPosts] = useState<BlogPost[]>([]);
-  const posts = useSelector((state: RootState) => state.blogs.blogs) || [];
+  // const posts = useSelector((state: RootState) => state.blogs.blogs) || [];
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sortBy, setSortBy] = useState('date');
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
+  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([])
+  const {getToken} = useAuth()
 
   // useEffect(() => {
   //   setPosts(postsData);
   // }, []);
 
   const categories = Array.from(
-    new Set(posts.map(post => post.category))
+    new Set(filteredPosts.map(post => post.category))
   ).sort();
 
-  const filteredPosts = posts
-    .filter(post => {
-      const matchesSearch =
-        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.category.toLowerCase().includes(searchQuery.toLowerCase());
-      const matchesCategory =
-        selectedCategory === 'All' || post.category === selectedCategory;
-      return matchesSearch && matchesCategory;
-    })
-    .sort((a, b) => {
+  useEffect(() => {
+    const fetchData = async () => {
+      const posts = await getUserBlogs((await getToken())!)
+      setFilteredPosts(posts)
+      console.log(`fetched data:`, posts)
+    }
+    fetchData()
+  }, [])
+
+  useEffect(() => {
+    setFilteredPosts(filteredPosts.sort((a, b) => {
       if (sortBy === 'date')
         return (
           new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
@@ -53,11 +58,33 @@ export default function AdminPage() {
       if (sortBy === 'title') return a.title.localeCompare(b.title);
       if (sortBy === 'author') return a.user.name.localeCompare(b.user.name);
       return 0;
-    });
+    }))
+  }, [filteredPosts, sortBy])
+
+  // const filteredPosts = posts
+  //   .filter(post => {
+  //     const matchesSearch =
+  //       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //       post.user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //       post.category.toLowerCase().includes(searchQuery.toLowerCase());
+  //     const matchesCategory =
+  //       selectedCategory === 'All' || post.category === selectedCategory;
+  //     return matchesSearch && matchesCategory;
+  //   })
+  //   .sort((a, b) => {
+  //     if (sortBy === 'date')
+  //       return (
+  //         new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+  //       );
+  //     if (sortBy === 'title') return a.title.localeCompare(b.title);
+  //     if (sortBy === 'author') return a.user.name.localeCompare(b.user.name);
+  //     return 0;
+  //   });
 
   const handleDelete = (id: string) => {
     if (confirm('Are you sure you want to delete this blog post?')) {
-      dispatch(deleteBlog(id));
+      // dispatch(deleteBlog(id));
+      console.log(id);
     }
   };
 
@@ -88,7 +115,7 @@ export default function AdminPage() {
             </div>
 
             <Link
-              href="/admin/create"
+              href="/blog/create"
               className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-semibold rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105"
             >
               <Plus className="w-5 h-5" />
@@ -162,7 +189,7 @@ export default function AdminPage() {
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <div className="bg-gradient-to-br from-violet-500 to-purple-600 text-white p-6 rounded-2xl shadow-lg">
-            <div className="text-3xl font-bold mb-2">{posts.length}</div>
+            <div className="text-3xl font-bold mb-2">{filteredPosts.length}</div>
             <div className="text-violet-100 font-medium">Total Posts</div>
           </div>
           <div className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white p-6 rounded-2xl shadow-lg">
@@ -177,7 +204,7 @@ export default function AdminPage() {
           </div>
           <div className="bg-gradient-to-br from-orange-500 to-red-600 text-white p-6 rounded-2xl shadow-lg">
             <div className="text-3xl font-bold mb-2">
-              {new Set(posts.map(p => p.user.name)).size}
+              {new Set(filteredPosts.map(p => p.user.name)).size}
             </div>
             <div className="text-orange-100 font-medium">Authors</div>
           </div>
