@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import {
   Plus,
@@ -12,19 +12,24 @@ import {
   Calendar,
   User,
 } from 'lucide-react';
-import { BlogPost } from '@/types/blog';
-import postsData from '@/data/post.json';
+// import { BlogPost } from '@/types/blog';
+// import postsData from '@/data/post.json';
 import Image from 'next/image';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/app/store/store';
+import { deleteBlog } from '@/app/store/features/blogs/blogsSlice';
 
 export default function AdminPage() {
-  const [posts, setPosts] = useState<BlogPost[]>([]);
+  // const [posts, setPosts] = useState<BlogPost[]>([]);
+  const posts = useSelector((state: RootState) => state.blogs.blogs) || [];
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sortBy, setSortBy] = useState('date');
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    setPosts(postsData);
-  }, []);
+  // useEffect(() => {
+  //   setPosts(postsData);
+  // }, []);
 
   const categories = Array.from(
     new Set(posts.map(post => post.category))
@@ -34,7 +39,7 @@ export default function AdminPage() {
     .filter(post => {
       const matchesSearch =
         post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        post.author.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
         post.category.toLowerCase().includes(searchQuery.toLowerCase());
       const matchesCategory =
         selectedCategory === 'All' || post.category === selectedCategory;
@@ -42,15 +47,17 @@ export default function AdminPage() {
     })
     .sort((a, b) => {
       if (sortBy === 'date')
-        return new Date(b.date).getTime() - new Date(a.date).getTime();
+        return (
+          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+        );
       if (sortBy === 'title') return a.title.localeCompare(b.title);
-      if (sortBy === 'author') return a.author.localeCompare(b.author);
+      if (sortBy === 'author') return a.user.name.localeCompare(b.user.name);
       return 0;
     });
 
   const handleDelete = (id: string) => {
     if (confirm('Are you sure you want to delete this blog post?')) {
-      setPosts(posts.filter(post => post.id !== id));
+      dispatch(deleteBlog(id));
     }
   };
 
@@ -170,7 +177,7 @@ export default function AdminPage() {
           </div>
           <div className="bg-gradient-to-br from-orange-500 to-red-600 text-white p-6 rounded-2xl shadow-lg">
             <div className="text-3xl font-bold mb-2">
-              {new Set(posts.map(p => p.author)).size}
+              {new Set(posts.map(p => p.user.name)).size}
             </div>
             <div className="text-orange-100 font-medium">Authors</div>
           </div>
@@ -230,7 +237,7 @@ export default function AdminPage() {
                       <div className="flex items-center space-x-2">
                         <User className="w-4 h-4 text-gray-400" />
                         <span className="text-gray-900 font-medium">
-                          {post.author}
+                          {post.user.name}
                         </span>
                       </div>
                     </td>
@@ -243,7 +250,7 @@ export default function AdminPage() {
                       <div className="flex items-center space-x-2">
                         <Calendar className="w-4 h-4 text-gray-400" />
                         <span className="text-gray-900 font-medium">
-                          {formatDate(post.date)}
+                          {formatDate(post.updatedAt)}
                         </span>
                       </div>
                     </td>

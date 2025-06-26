@@ -4,3 +4,12 @@ services:
     container_name: frontend
     ports:
       - "3000:3000"
+    env_file:
+      - .env
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: ./app
+        - action: rebuild
+          path: package.json

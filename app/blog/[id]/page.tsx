@@ -22,9 +22,12 @@ import {
   Check,
 } from 'lucide-react';
 import { BlogPost } from '@/types/blog';
-import postsData from '@/data/post.json';
+// import postsData from '@/data/post.json';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+// import { useSelector } from 'react-redux';
+// import { RootState } from '@/app/store/store';
+import getBlogById from '@/app/api/blogs/getBlogById';
 
 export default function BlogDetailPage() {
   const params = useParams();
@@ -50,25 +53,19 @@ export default function BlogDetailPage() {
     { user: string; text: string; date: string }[]
   >([]);
   const [newComment, setNewComment] = useState('');
+  // const postsData = useSelector((state: RootState) => state.blogs.blogs) || []
 
   useEffect(() => {
-    const foundPost = postsData.find((p: BlogPost) => p.id === params.id);
-    if (foundPost) {
-      setPost(foundPost);
-
-      // Find related posts (same category, excluding current post)
-      const related = postsData
-        .filter(
-          (p: BlogPost) =>
-            p.category === foundPost.category && p.id !== foundPost.id
-        )
-        .slice(0, 3);
-      setRelatedPosts(related);
-
-      // Calculate reading time (assuming 200 words per minute)
-      const wordCount = foundPost.excerpt.split(' ').length * 10; // Simulated content length
-      setReadingTime(Math.ceil(wordCount / 200));
-    }
+    const fetchData = async () => {
+      const foundPost = await getBlogById(params.id?.toString() || '');
+      if (foundPost) {
+        setPost(foundPost);
+        setRelatedPosts([]);
+        const wordCount = foundPost.excerpt.split(' ').length * 10; // Simulated content length
+        setReadingTime(Math.ceil(wordCount / 200));
+      }
+    };
+    fetchData();
   }, [params.id]);
 
   // Handle text selection in the article
@@ -302,11 +299,11 @@ export default function BlogDetailPage() {
             <div className="flex flex-wrap items-center justify-center gap-6 text-sm text-gray-500">
               <div className="flex items-center space-x-2">
                 <User className="w-4 h-4" />
-                <span className="font-medium">{post.author}</span>
+                <span className="font-medium">{post.user.name}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Calendar className="w-4 h-4" />
-                <span>{formatDate(post.date)}</span>
+                <span>{formatDate(post.updatedAt)}</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Clock className="w-4 h-4" />
@@ -558,9 +555,9 @@ export default function BlogDetailPage() {
                         {relatedPost.excerpt}
                       </p>
                       <div className="flex items-center text-sm text-gray-500">
-                        <span>{relatedPost.author}</span>
+                        <span>{relatedPost.user.name}</span>
                         <span className="mx-2">•</span>
-                        <span>{formatDate(relatedPost.date)}</span>
+                        <span>{formatDate(relatedPost.updatedAt)}</span>
                       </div>
                     </div>
                   </article>

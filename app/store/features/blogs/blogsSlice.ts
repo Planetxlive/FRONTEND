@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import postsData from '@/data/post.json';
+// import postsData from '@/data/post.json';
 import { BlogPost } from '@/types/blog';
 
 interface BlogState {
@@ -7,7 +7,7 @@ interface BlogState {
 }
 
 const initialState: BlogState = {
-  blogs: postsData,
+  blogs: [],
 };
 
 const blogsSlice = createSlice({
@@ -21,8 +21,12 @@ const blogsSlice = createSlice({
     clearBlogs(state) {
       state.blogs = null;
     },
+    deleteBlog(state, action: PayloadAction<string>) {
+      state.blogs =
+        state.blogs?.filter(post => post.id !== action.payload) || [];
+    },
   },
 });
 
-export const { setBlogs, clearBlogs } = blogsSlice.actions;
+export const { setBlogs, clearBlogs, deleteBlog } = blogsSlice.actions;
 export default blogsSlice.reducer;

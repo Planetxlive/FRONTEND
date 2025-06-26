@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useMemo, Suspense } from 'react';
+import { useState, useMemo, Suspense, useEffect } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import EditorialSection from '@/components/blog/EditorialSection';
 import Pagination from '@/components/blog/Pagination';
-import { PaginationInfo } from '@/types/blog';
+import { BlogPost, PaginationInfo } from '@/types/blog';
 import { useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 
@@ -16,7 +16,6 @@ function BlogPageContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
   const data = useSelector((state: RootState) => state.blogs.blogs);
-
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
 
   // Filter posts based on category
@@ -36,7 +35,7 @@ function BlogPageContent() {
   const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
   const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
   const endIndex = startIndex + POSTS_PER_PAGE;
-  const currentPosts = filteredPosts.slice(startIndex, endIndex);
+  const [currentPosts, setCurrentPosts] = useState<BlogPost[]>([]);
 
   const paginationInfo: PaginationInfo = {
     currentPage,
@@ -44,6 +43,10 @@ function BlogPageContent() {
     totalPosts,
     postsPerPage: POSTS_PER_PAGE,
   };
+
+  useEffect(() => {
+    setCurrentPosts(filteredPosts.slice(startIndex, endIndex));
+  }, [data, endIndex, filteredPosts, setCurrentPosts, startIndex]);
 
   // Reset filters when no results
   const resetFilters = () => {
