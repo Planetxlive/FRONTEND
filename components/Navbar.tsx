@@ -14,6 +14,8 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '@/app/store/features/user/userSlice';
 import Sidebar from './Sidebar';
 import { useRouter } from 'next/navigation';
+import { setBlogs } from '@/app/store/features/blogs/blogsSlice';
+import getAllBlogs from '@/app/api/blogs/getAllBlogs';
 
 export default function Navbar() {
   const router = useRouter();
@@ -30,8 +32,11 @@ export default function Navbar() {
 
   useEffect(() => {
     const fetchData = async () => {
-      if (isSignedIn)
+      if (isSignedIn) {
+        console.log(await getToken());
         dispatch(setUser(await getUser((await getToken()) || '')));
+      }
+      dispatch(setBlogs(await getAllBlogs()));
     };
     fetchData();
   }, [dispatch, getToken, isSignedIn]);

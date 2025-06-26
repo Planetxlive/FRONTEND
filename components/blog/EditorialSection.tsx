@@ -142,11 +142,11 @@ export default function EditorialSection({
                   <div className="flex items-center space-x-6 text-sm text-gray-500">
                     <div className="flex items-center space-x-2">
                       <User className="w-4 h-4" />
-                      <span className="font-medium">{post.author}</span>
+                      <span className="font-medium">{post.user.name}</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Calendar className="w-4 h-4" />
-                      <span>{formatDate(post.date)}</span>
+                      <span>{formatDate(post.updatedAt)}</span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <TrendingUp className="w-4 h-4" />

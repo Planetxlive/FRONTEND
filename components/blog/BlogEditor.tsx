@@ -16,7 +16,7 @@ import ImageUpload from './ImageUpload';
 
 interface BlogEditorProps {
   initialData?: BlogPost;
-  onSubmit: (data: Omit<BlogPost, 'id'>) => void;
+  onSubmit: (data: Partial<BlogPost>) => void;
   onCancel: () => void;
   isSubmitting: boolean;
   submitButtonText: string;
@@ -127,11 +127,9 @@ export default function BlogEditor({
     if (!validateForm()) {
       return;
     }
-
+    formData.content = content;
     onSubmit({
       ...formData,
-      author: 'Anonymous',
-      date: new Date().toISOString(),
     });
   };
 

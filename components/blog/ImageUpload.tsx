@@ -3,6 +3,7 @@
 import { useState, useRef } from 'react';
 import { Upload, X, Image as ImageIcon, Link, Check } from 'lucide-react';
 import Image from 'next/image';
+import uploadImage from '@/lib/upload';
 
 interface ImageUploadProps {
   value: string;
@@ -13,12 +14,13 @@ interface ImageUploadProps {
 export default function ImageUpload({
   value,
   onChange,
-  error,
+  error: err,
 }: ImageUploadProps) {
   const [isUrlMode, setIsUrlMode] = useState(true);
   const [urlInput, setUrlInput] = useState(value);
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const [error, setError] = useState(err);
 
   const handleUrlSubmit = () => {
     if (urlInput.trim()) {
@@ -26,11 +28,13 @@ export default function ImageUpload({
     }
   };
 
-  const handleFileSelect = (file: File) => {
+  const handleFileSelect = async (file: File) => {
     // In a real application, you would upload the file to your server or cloud storage
     // For this demo, we'll create a local URL
-    const url = URL.createObjectURL(file);
-    onChange(url);
+    // const url = URL.createObjectURL(file);
+    const { url, error } = await uploadImage(file);
+    if (url) onChange(url);
+    else setError(error);
   };
 
   const handleDrop = (e: React.DragEvent) => {

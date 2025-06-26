@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import BlogEditor from '@/components/blog/BlogEditor';
 import { BlogPost } from '@/types/blog';
-import postsData from '@/data/post.json';
+// import postsData from '@/data/post.json';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 
@@ -16,12 +16,12 @@ export default function EditBlogPage() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const foundPost = postsData.find((p: BlogPost) => p.id === params.id);
-    setPost(foundPost || null);
+    // const foundPost = postsData.find((p: BlogPost) => p.id === params.id);
+    setPost(null);
     setIsLoading(false);
   }, [params.id]);
 
-  const handleSubmit = async (blogData: Omit<BlogPost, 'id'>) => {
+  const handleSubmit = async (blogData: Partial<BlogPost>) => {
     setIsSubmitting(true);
 
     try {

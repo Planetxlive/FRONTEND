@@ -6,23 +6,24 @@ import BlogEditor from '@/components/blog/BlogEditor';
 import { BlogPost } from '@/types/blog';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import useAuth from '@/hooks/auth/useAuth';
+import createBlog from '@/app/api/blogs/createBlog';
 
 export default function CreateBlogPage() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const { getToken } = useAuth();
 
-  const handleSubmit = async (blogData: Omit<BlogPost, 'id'>) => {
+  const handleSubmit = async (blogData: Partial<BlogPost>) => {
     setIsSubmitting(true);
 
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
-
+      createBlog((await getToken())!, blogData);
       // In a real app, you would save to your backend/database
       console.log('Creating blog post:', blogData);
-
       // Redirect to admin page
-      router.push('/admin');
+      router.push('/blog/mine');
     } catch (error) {
       console.error('Error creating blog post:', error);
     } finally {
@@ -31,7 +32,7 @@ export default function CreateBlogPage() {
   };
 
   const handleCancel = () => {
-    router.push('/admin');
+    router.push('/blog/mine');
   };
 
   return (
