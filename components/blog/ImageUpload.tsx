@@ -20,7 +20,7 @@ export default function ImageUpload({
   const [urlInput, setUrlInput] = useState(value);
   const [isDragging, setIsDragging] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
-  const [error, setError] = useState(err)
+  const [error, setError] = useState(err);
 
   const handleUrlSubmit = () => {
     if (urlInput.trim()) {
@@ -32,9 +32,9 @@ export default function ImageUpload({
     // In a real application, you would upload the file to your server or cloud storage
     // For this demo, we'll create a local URL
     // const url = URL.createObjectURL(file);
-    const {url, error} = await uploadImage(file)
-    if(url) onChange(url);
-    else setError(error)
+    const { url, error } = await uploadImage(file);
+    if (url) onChange(url);
+    else setError(error);
   };
 
   const handleDrop = (e: React.DragEvent) => {

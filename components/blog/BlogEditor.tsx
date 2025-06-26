@@ -129,7 +129,7 @@ export default function BlogEditor({
     }
     formData.content = content;
     onSubmit({
-      ...formData
+      ...formData,
     });
   };
 

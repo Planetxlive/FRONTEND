@@ -9,6 +9,6 @@ export default async function getUserBlogs(token: string) {
       Authorization: `Bearer ${token}`,
     },
   });
-  console.log(res.data.data)
+  console.log(res.data.data);
   return res.data.data.blogs;
 }

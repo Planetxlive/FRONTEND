@@ -12,14 +12,14 @@ import createBlog from '@/app/api/blogs/createBlog';
 export default function CreateBlogPage() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const {getToken} = useAuth()
+  const { getToken } = useAuth();
 
   const handleSubmit = async (blogData: Partial<BlogPost>) => {
     setIsSubmitting(true);
-    
+
     try {
       // Simulate API call
-      createBlog((await getToken())!, blogData)
+      createBlog((await getToken())!, blogData);
       // In a real app, you would save to your backend/database
       console.log('Creating blog post:', blogData);
       // Redirect to admin page
