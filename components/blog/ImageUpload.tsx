@@ -29,6 +29,16 @@ export default function ImageUpload({
   };
 
   const handleFileSelect = async (file: File) => {
+    // Check file size (10MB = 10 * 1024 * 1024 bytes)
+    const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+    if (file.size > maxSize) {
+      setError('File size must be less than 10MB');
+      return;
+    }
+
+    // Clear any previous errors
+    setError('');
+
     // In a real application, you would upload the file to your server or cloud storage
     // For this demo, we'll create a local URL
     // const url = URL.createObjectURL(file);
