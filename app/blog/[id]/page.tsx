@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -25,15 +25,14 @@ import { BlogPost } from '@/types/blog';
 // import postsData from '@/data/post.json';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-// import { useSelector } from 'react-redux';
-// import { RootState } from '@/app/store/store';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/app/store/store';
 import getBlogById from '@/app/api/blogs/getBlogById';
 
 export default function BlogDetailPage() {
   const params = useParams();
   const router = useRouter();
   const [post, setPost] = useState<BlogPost | null>(null);
-  const [relatedPosts, setRelatedPosts] = useState<BlogPost[]>([]);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
   const [showShareMenu, setShowShareMenu] = useState(false);
@@ -53,14 +52,86 @@ export default function BlogDetailPage() {
     { user: string; text: string; date: string }[]
   >([]);
   const [newComment, setNewComment] = useState('');
-  // const postsData = useSelector((state: RootState) => state.blogs.blogs) || []
+
+  // Get all blogs from Redux store
+  const allBlogs = useSelector((state: RootState) => state.blogs.blogs) || [];
+
+  // Calculate related posts based on tag similarity
+  const relatedPosts = useMemo(() => {
+    if (!post || !allBlogs.length) return [];
+
+    // Filter out the current post and find posts with similar tags
+    const otherPosts = allBlogs.filter(blog => blog.id !== post.id);
+
+    console.log('Current post tags:', post.tags);
+    console.log('Available posts for matching:', otherPosts.length);
+
+    // Calculate similarity score for each post based on tag overlap
+    const postsWithScore = otherPosts.map(blog => {
+      const currentTags = post.tags || [];
+      const blogTags = blog.tags || [];
+
+      // Calculate tag similarity (Jaccard similarity)
+      const intersection = currentTags.filter(tag =>
+        blogTags.some(blogTag => blogTag.toLowerCase() === tag.toLowerCase())
+      ).length;
+
+      const union = new Set([...currentTags, ...blogTags]).size;
+      const similarity = union > 0 ? intersection / union : 0;
+
+      // Also consider category similarity
+      const categoryBonus = blog.category === post.category ? 0.3 : 0;
+
+      console.log(`Post "${blog.title}":`, {
+        currentTags,
+        blogTags,
+        intersection,
+        union,
+        similarity,
+        categoryBonus,
+        totalScore: similarity + categoryBonus,
+      });
+
+      return {
+        ...blog,
+        similarity: similarity + categoryBonus,
+      };
+    });
+
+    // Sort by similarity score (highest first) and take top 3
+    const filtered = postsWithScore
+      .filter(post => post.similarity > 0) // Only show posts with some similarity
+      .sort((a, b) => b.similarity - a.similarity)
+      .slice(0, 3)
+      .map(({ ...rest }) => rest);
+
+    console.log('Related posts found:', filtered.length);
+
+    // If no tag matches found, show recent posts from same category
+    if (filtered.length === 0) {
+      const sameCategoryPosts = otherPosts
+        .filter(blog => blog.category === post.category)
+        .sort(
+          (a, b) =>
+            new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+        )
+        .slice(0, 3);
+
+      console.log(
+        'Fallback: Same category posts found:',
+        sameCategoryPosts.length
+      );
+      return sameCategoryPosts;
+    }
+
+    return filtered;
+  }, [post, allBlogs]);
 
   useEffect(() => {
     const fetchData = async () => {
       const foundPost = await getBlogById(params.id?.toString() || '');
       if (foundPost) {
         setPost(foundPost);
-        setRelatedPosts([]);
         const wordCount = foundPost.excerpt.split(' ').length * 10; // Simulated content length
         setReadingTime(Math.ceil(wordCount / 200));
       }
@@ -183,7 +254,7 @@ export default function BlogDetailPage() {
 
   if (!post) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-gray-50 pt-20 flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-full animate-spin mx-auto mb-4"></div>
           <p className="text-gray-600">Loading article...</p>
@@ -193,9 +264,9 @@ export default function BlogDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white pt-20">
       {/* Navigation Bar */}
-      <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-gray-200">
+      <nav className="bg-white/95 backdrop-blur-xl border-b border-gray-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-4">
             <button
@@ -311,7 +382,7 @@ export default function BlogDetailPage() {
               </div>
               <div className="flex items-center space-x-2">
                 <Eye className="w-4 h-4" />
-                <span>2.4k views</span>
+                <span>{post.views} views</span>
               </div>
               {post.location && (
                 <div className="flex items-center space-x-2">
@@ -559,6 +630,31 @@ export default function BlogDetailPage() {
                         <span className="mx-2">•</span>
                         <span>{formatDate(relatedPost.updatedAt)}</span>
                       </div>
+                      {/* Show matching tags for debugging */}
+                      {post && relatedPost.tags && (
+                        <div className="mt-3 pt-3 border-t border-gray-100">
+                          <div className="flex flex-wrap gap-1">
+                            {relatedPost.tags.slice(0, 3).map(tag => {
+                              const isMatching = post.tags?.some(
+                                currentTag =>
+                                  currentTag.toLowerCase() === tag.toLowerCase()
+                              );
+                              return (
+                                <span
+                                  key={tag}
+                                  className={`px-2 py-1 text-xs rounded-full ${
+                                    isMatching
+                                      ? 'bg-green-100 text-green-700'
+                                      : 'bg-gray-100 text-gray-600'
+                                  }`}
+                                >
+                                  {tag}
+                                </span>
+                              );
+                            })}
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </article>
                 </Link>
@@ -568,7 +664,34 @@ export default function BlogDetailPage() {
         </section>
       )}
 
-      {/* Newsletter CTA */}
+      {/* No Related Articles Message */}
+      {post && relatedPosts.length === 0 && allBlogs.length > 1 && (
+        <section className="bg-gray-50 py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-gradient-to-r from-gray-200 to-gray-300 rounded-full flex items-center justify-center mx-auto mb-6">
+                <Tag className="w-8 h-8 text-gray-500" />
+              </div>
+              <h2 className="text-2xl font-light text-gray-900 mb-4">
+                No Related Articles Found
+              </h2>
+              <p className="text-gray-600 font-light mb-8 max-w-md mx-auto">
+                This article has unique tags. Explore our other articles to
+                discover more insights.
+              </p>
+              <Link
+                href="/blog"
+                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-full hover:shadow-lg transition-all duration-200 font-semibold"
+              >
+                <span>Browse All Articles</span>
+                <ArrowLeft className="w-4 h-4 ml-2 rotate-180" />
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Newsletter CTA
       <section className="bg-gradient-to-r from-gray-900 to-black text-white py-20">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-3xl md:text-4xl font-light mb-6">
@@ -589,7 +712,7 @@ export default function BlogDetailPage() {
             </button>
           </div>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

@@ -4,10 +4,12 @@ import { BlogPost } from '@/types/blog';
 
 interface BlogState {
   blogs: BlogPost[] | null;
+  userBlogs: BlogPost[] | null;
 }
 
 const initialState: BlogState = {
   blogs: [],
+  userBlogs: [],
 };
 
 const blogsSlice = createSlice({
@@ -18,15 +20,33 @@ const blogsSlice = createSlice({
       console.log(action.payload);
       state.blogs = action.payload;
     },
+    setUserBlogs(state, action: PayloadAction<BlogPost[]>) {
+      console.log('Setting user blogs:', action.payload);
+      state.userBlogs = action.payload;
+    },
     clearBlogs(state) {
       state.blogs = null;
+    },
+    clearUserBlogs(state) {
+      state.userBlogs = null;
     },
     deleteBlog(state, action: PayloadAction<string>) {
       state.blogs =
         state.blogs?.filter(post => post.id !== action.payload) || [];
     },
+    deleteUserBlog(state, action: PayloadAction<string>) {
+      state.userBlogs =
+        state.userBlogs?.filter(post => post.id !== action.payload) || [];
+    },
   },
 });
 
-export const { setBlogs, clearBlogs, deleteBlog } = blogsSlice.actions;
+export const {
+  setBlogs,
+  setUserBlogs,
+  clearBlogs,
+  clearUserBlogs,
+  deleteBlog,
+  deleteUserBlog,
+} = blogsSlice.actions;
 export default blogsSlice.reducer;

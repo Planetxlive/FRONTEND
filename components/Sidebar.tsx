@@ -156,6 +156,19 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                 <span className="text-gray-700">Blogs</span>
               </div>
 
+              {isSignedIn && (
+                <div
+                  onClick={() => {
+                    onClose();
+                    router.push('/blog/mine');
+                  }}
+                  className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors"
+                >
+                  <FileText className="w-5 h-5 text-gray-600" />
+                  <span className="text-gray-700">My Blogs</span>
+                </div>
+              )}
+
               <div
                 onClick={() => {
                   onClose();
