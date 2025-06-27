@@ -13,6 +13,7 @@ import {
 import { BlogPost } from '@/types/blog';
 import RichTextEditor from './RichTextEditor';
 import ImageUpload from './ImageUpload';
+import { toast } from 'react-hot-toast';
 
 interface BlogEditorProps {
   initialData?: BlogPost;
@@ -106,25 +107,58 @@ export default function BlogEditor({
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
+    const missingFields: string[] = [];
 
-    if (!formData.title.trim()) newErrors.title = 'Title is required';
-    if (!formData.excerpt.trim()) newErrors.excerpt = 'Excerpt is required';
-    if (!formData.category) newErrors.category = 'Category is required';
-    if (!formData.image.trim()) newErrors.image = 'Featured image is required';
-    if (formData.tags.length === 0)
+    if (!formData.title.trim()) {
+      newErrors.title = 'Title is required';
+      missingFields.push('Title');
+    }
+    if (!formData.excerpt.trim()) {
+      newErrors.excerpt = 'Excerpt is required';
+      missingFields.push('Excerpt');
+    }
+    if (!formData.category) {
+      newErrors.category = 'Category is required';
+      missingFields.push('Category');
+    }
+    if (!formData.image.trim()) {
+      newErrors.image = 'Featured image is required';
+      missingFields.push('Featured Image');
+    }
+    if (formData.tags.length === 0) {
       newErrors.tags = 'At least one tag is required';
-    if (!formData.location.trim()) newErrors.location = 'Location is required';
-    if (!formData.contactInfo.trim())
+      missingFields.push('Tags');
+    }
+    if (!formData.location.trim()) {
+      newErrors.location = 'Location is required';
+      missingFields.push('Location');
+    }
+    if (!formData.contactInfo.trim()) {
       newErrors.contactInfo = 'Contact info is required';
+      missingFields.push('Contact Info');
+    }
+    if (!content.trim()) {
+      missingFields.push('Content');
+    }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+
+    // Show toast with missing fields
+    if (missingFields.length > 0) {
+      const missingFieldsText = missingFields.join(', ');
+      toast.error(
+        `Please fill in the following required fields: ${missingFieldsText}`
+      );
+    }
+
+    return Object.keys(newErrors).length === 0 && content.trim() !== '';
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!validateForm()) {
+      toast.error('Please fill in all required fields');
       return;
     }
     formData.content = content;
