@@ -17,21 +17,21 @@ export default function EditBlogPage() {
   const [post, setPost] = useState<BlogPost | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const { getToken } = useAuth()
+  const { getToken } = useAuth();
 
   useEffect(() => {
     // const foundPost = postsData.find((p: BlogPost) => p.id === params.id);
-    setIsLoading(true)
+    setIsLoading(true);
     const fetchData = async () => {
-      if(params.id == undefined){
-        setPost(null)
+      if (params.id == undefined) {
+        setPost(null);
         setIsLoading(false);
         return;
       }
-      const foundPost = await getBlogById(params.id?.toString())
+      const foundPost = await getBlogById(params.id?.toString());
       setPost(foundPost);
       setIsLoading(false);
-    }
+    };
     fetchData();
   }, [params.id]);
 
@@ -40,8 +40,10 @@ export default function EditBlogPage() {
 
     try {
       // Simulate API call
-      if(params.id !== undefined)
-        console.log(await updateBlog((await getToken())!, blogData, params.id?.toString()))
+      if (params.id !== undefined)
+        console.log(
+          await updateBlog((await getToken())!, blogData, params.id?.toString())
+        );
 
       // In a real app, you would update in your backend/database
       console.log('Updating blog post:', { id: params.id, ...blogData });
