@@ -2,12 +2,13 @@
 node_modules/
 .pnp
 .pnp.js
-
-# Production builds
 .next/
+.clerk/
 out/
 build/
 dist/
+
+# Production builds
 
 # Environment files
 .env

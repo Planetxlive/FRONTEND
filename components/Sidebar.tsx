@@ -72,7 +72,7 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
                   <Avatar className="w-16 h-16 bg-gradient-to-r from-purple-500 to-blue-500">
                     <AvatarImage src={user?.coverURL} alt="User" />
                     <AvatarFallback className="text-black text-lg font-semibold">
-                      {`${user?.name.split(" ")[0][0] || ""}${(user?.name.split(" ")[1] || [""])[0] || ""}`}
+                      {`${user?.name.split(' ')[0][0] || ''}${(user?.name.split(' ')[1] || [''])[0] || ''}`}
                     </AvatarFallback>
                   </Avatar>
                   <div className="flex-1">

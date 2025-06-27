@@ -48,6 +48,7 @@ export default function AdminPage() {
   const dispatch = useDispatch();
 
   // Get user blogs from Redux store
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const posts = useSelector((state: RootState) => state.blogs.userBlogs) || [];
   console.log('posts', posts);
 

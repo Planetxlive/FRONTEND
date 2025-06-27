@@ -14,25 +14,27 @@ import { UserUpdateType } from '@/types/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
 import useAuth from '@/hooks/auth/useAuth';
-import updateUserApi  from '../api/user/updateUser';
+import updateUserApi from '../api/user/updateUser';
 import { updateUser } from '../store/features/user/userSlice';
 
 const UserProfile: React.FC = () => {
   const [isEditing, setIsEditing] = useState(false);
   const user = useSelector((state: RootState) => state.user.user);
-  const [editData, setEditData] = useState<Partial<UserUpdateType> | null>(null);
-  const { getToken } = useAuth()
-  const dispatch = useDispatch()
+  const [editData, setEditData] = useState<Partial<UserUpdateType> | null>(
+    null
+  );
+  const { getToken } = useAuth();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setEditData(user);
-  }, [user])
+  }, [user]);
 
   const handleSave = async () => {
     // onUpdateUser(editData);
-    const user = await updateUserApi((await getToken())!, editData!)
-    dispatch(updateUser(user!))
-    console.log(user)
+    const user = await updateUserApi((await getToken())!, editData!);
+    dispatch(updateUser(user!));
+    console.log(user);
     setIsEditing(false);
   };
 
@@ -43,7 +45,7 @@ const UserProfile: React.FC = () => {
       mobile: user?.mobile || '',
       state: user?.state,
       city: user?.city,
-      coverURL: user?.coverURL || ''
+      coverURL: user?.coverURL || '',
     });
     setIsEditing(false);
   };
@@ -127,7 +129,9 @@ const UserProfile: React.FC = () => {
                   <input
                     type="text"
                     value={editData?.name}
-                    onChange={(e) => setEditData({ ...editData, name: e.target.value })}
+                    onChange={e =>
+                      setEditData({ ...editData, name: e.target.value })
+                    }
                     placeholder="Enter your name"
                     className="text-3xl font-bold text-gray-900 bg-transparent border-b-2 border-blue-300 focus:border-blue-500 outline-none w-full"
                   />
@@ -185,7 +189,7 @@ const UserProfile: React.FC = () => {
                 <input
                   type="tel"
                   value={editData?.mobile}
-                  onChange={(e) =>
+                  onChange={e =>
                     setEditData({ ...editData, mobile: e.target.value })
                   }
                   placeholder="Enter mobile number"
@@ -206,8 +210,8 @@ const UserProfile: React.FC = () => {
               {isEditing ? (
                 <input
                   type="tel"
-                  value={editData?.whatsappMobile || ""}
-                  onChange={(e) =>
+                  value={editData?.whatsappMobile || ''}
+                  onChange={e =>
                     setEditData({ ...editData, whatsappMobile: e.target.value })
                   }
                   placeholder="Enter WhatsApp number"
@@ -238,7 +242,7 @@ const UserProfile: React.FC = () => {
                 <input
                   type="text"
                   value={editData?.state}
-                  onChange={(e) =>
+                  onChange={e =>
                     setEditData({ ...editData, state: e.target.value })
                   }
                   placeholder="Enter state"
@@ -259,7 +263,7 @@ const UserProfile: React.FC = () => {
                 <input
                   type="text"
                   value={editData?.city}
-                  onChange={(e) =>
+                  onChange={e =>
                     setEditData({ ...editData, city: e.target.value })
                   }
                   placeholder="Enter city"
@@ -296,8 +300,8 @@ const UserProfile: React.FC = () => {
             </label>
             <input
               type="url"
-              value={editData?.coverURL || ""}
-              onChange={(e) =>
+              value={editData?.coverURL || ''}
+              onChange={e =>
                 setEditData({ ...editData, coverURL: e.target.value })
               }
               placeholder="Enter cover image URL"
