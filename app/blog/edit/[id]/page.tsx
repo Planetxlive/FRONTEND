@@ -7,6 +7,9 @@ import { BlogPost } from '@/types/blog';
 // import postsData from '@/data/post.json';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import getBlogById from '@/app/api/blogs/getBlogById';
+import updateBlog from '@/app/api/blogs/updateBlog';
+import useAuth from '@/hooks/auth/useAuth';
 
 export default function EditBlogPage() {
   const params = useParams();
@@ -14,11 +17,22 @@ export default function EditBlogPage() {
   const [post, setPost] = useState<BlogPost | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const { getToken } = useAuth()
 
   useEffect(() => {
     // const foundPost = postsData.find((p: BlogPost) => p.id === params.id);
-    setPost(null);
-    setIsLoading(false);
+    setIsLoading(true)
+    const fetchData = async () => {
+      if(params.id == undefined){
+        setPost(null)
+        setIsLoading(false);
+        return;
+      }
+      const foundPost = await getBlogById(params.id?.toString())
+      setPost(foundPost);
+      setIsLoading(false);
+    }
+    fetchData();
   }, [params.id]);
 
   const handleSubmit = async (blogData: Partial<BlogPost>) => {
@@ -26,13 +40,14 @@ export default function EditBlogPage() {
 
     try {
       // Simulate API call
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      if(params.id !== undefined)
+        console.log(await updateBlog((await getToken())!, blogData, params.id?.toString()))
 
       // In a real app, you would update in your backend/database
       console.log('Updating blog post:', { id: params.id, ...blogData });
 
       // Redirect to admin page
-      router.push('/admin');
+      router.push('/blog/mine');
     } catch (error) {
       console.error('Error updating blog post:', error);
     } finally {
@@ -41,7 +56,7 @@ export default function EditBlogPage() {
   };
 
   const handleCancel = () => {
-    router.push('/admin');
+    router.push('/blog/mine');
   };
 
   if (isLoading) {

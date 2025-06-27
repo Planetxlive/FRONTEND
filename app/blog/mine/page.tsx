@@ -47,8 +47,7 @@ export default function AdminPage() {
       console.log(`fetched data:`, posts);
     };
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getToken]);
 
   useEffect(() => {
     setFilteredPosts(
@@ -296,7 +295,7 @@ export default function AdminPage() {
                           <Eye className="w-5 h-5" />
                         </Link>
                         <Link
-                          href={`/admin/edit/${post.id}`}
+                          href={`/blog/edit/${post.id}`}
                           className="p-2 text-violet-600 hover:bg-violet-100 rounded-xl transition-colors duration-200"
                           title="Edit Post"
                         >
