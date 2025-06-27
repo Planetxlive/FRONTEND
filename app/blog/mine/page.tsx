@@ -12,82 +12,134 @@ import {
   Calendar,
   User,
 } from 'lucide-react';
-// import { BlogPost } from '@/types/blog';
-// import postsData from '@/data/post.json';
+
 import Image from 'next/image';
-// import { useDispatch, useSelector } from 'react-redux';
-// import { RootState } from '@/app/store/store';
-// import { deleteBlog } from '@/app/store/features/blogs/blogsSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/app/store/store';
+import {
+  deleteUserBlog,
+  setUserBlogs,
+} from '@/app/store/features/blogs/blogsSlice';
 import { BlogPost } from '@/types/blog';
 import useAuth from '@/hooks/auth/useAuth';
 import getUserBlogs from '@/app/api/blogs/getUserBlogs';
+import deleteBlog from '@/app/api/blogs/deleteBlog';
+import { toast } from 'react-hot-toast';
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 
 export default function AdminPage() {
-  // const [posts, setPosts] = useState<BlogPost[]>([]);
-  // const posts = useSelector((state: RootState) => state.blogs.blogs) || [];
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [sortBy, setSortBy] = useState('date');
-  // const dispatch = useDispatch();
-  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [postToDelete, setPostToDelete] = useState<BlogPost | null>(null);
   const { getToken } = useAuth();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   setPosts(postsData);
-  // }, []);
+  // Get user blogs from Redux store
+  const posts = useSelector((state: RootState) => state.blogs.userBlogs) || [];
+  console.log('posts', posts);
+
+  const [filteredPosts, setFilteredPosts] = useState<BlogPost[]>([]);
 
   const categories = Array.from(
-    new Set(filteredPosts.map(post => post.category))
+    new Set(posts.map(post => post.category))
   ).sort();
 
+  // Fetch user blogs and update Redux store
   useEffect(() => {
     const fetchData = async () => {
-      const posts = await getUserBlogs((await getToken())!);
-      setFilteredPosts(posts);
-      console.log(`fetched data:`, posts);
+      try {
+        setIsLoading(true);
+        const token = await getToken();
+        if (!token) {
+          toast.error('Authentication required');
+          return;
+        }
+        const fetchedPosts = await getUserBlogs(token);
+        dispatch(setUserBlogs(fetchedPosts));
+        setFilteredPosts(fetchedPosts);
+        console.log('Fetched user blogs:', fetchedPosts);
+      } catch (error) {
+        console.error('Error fetching blogs:', error);
+        toast.error('Failed to fetch blogs');
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [getToken, dispatch]);
 
+  // Apply search, filter, and sort
   useEffect(() => {
-    setFilteredPosts(
-      filteredPosts.sort((a, b) => {
-        if (sortBy === 'date')
-          return (
-            new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
-          );
-        if (sortBy === 'title') return a.title.localeCompare(b.title);
-        if (sortBy === 'author') return a.user.name.localeCompare(b.user.name);
-        return 0;
-      })
-    );
-  }, [filteredPosts, sortBy]);
+    let filtered = posts.filter(post => {
+      const matchesSearch =
+        post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        post.category.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesCategory =
+        selectedCategory === 'All' || post.category === selectedCategory;
+      return matchesSearch && matchesCategory;
+    });
 
-  // const filteredPosts = posts
-  //   .filter(post => {
-  //     const matchesSearch =
-  //       post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  //       post.user.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  //       post.category.toLowerCase().includes(searchQuery.toLowerCase());
-  //     const matchesCategory =
-  //       selectedCategory === 'All' || post.category === selectedCategory;
-  //     return matchesSearch && matchesCategory;
-  //   })
-  //   .sort((a, b) => {
-  //     if (sortBy === 'date')
-  //       return (
-  //         new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
-  //       );
-  //     if (sortBy === 'title') return a.title.localeCompare(b.title);
-  //     if (sortBy === 'author') return a.user.name.localeCompare(b.user.name);
-  //     return 0;
-  //   });
+    // Apply sorting
+    filtered = filtered.sort((a, b) => {
+      if (sortBy === 'date')
+        return (
+          new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
+        );
+      if (sortBy === 'title') return a.title.localeCompare(b.title);
+      if (sortBy === 'author') return a.user.name.localeCompare(b.user.name);
+      return 0;
+    });
 
-  const handleDelete = (id: string) => {
-    if (confirm('Are you sure you want to delete this blog post?')) {
-      // dispatch(deleteBlog(id));
-      console.log(id);
+    setFilteredPosts(filtered);
+  }, [posts, searchQuery, selectedCategory, sortBy]);
+
+  const handleDelete = async (id: string) => {
+    const post = posts.find(p => p.id === id);
+    if (post) {
+      setPostToDelete(post);
+      setDeleteDialogOpen(true);
+    }
+  };
+
+  const confirmDelete = async () => {
+    if (!postToDelete) return;
+
+    try {
+      setDeletingId(postToDelete.id);
+      const token = await getToken();
+      if (!token) {
+        toast.error('Authentication required');
+        return;
+      }
+
+      await deleteBlog(token, postToDelete.id);
+      toast.success('Blog post deleted successfully');
+
+      // Remove from Redux user blogs store
+      dispatch(deleteUserBlog(postToDelete.id));
+    } catch (error: unknown) {
+      console.error('Delete error:', error);
+      toast.error(
+        error instanceof Error ? error.message : 'Failed to delete blog post'
+      );
+    } finally {
+      setDeletingId(null);
+      setDeleteDialogOpen(false);
+      setPostToDelete(null);
     }
   };
 
@@ -99,17 +151,29 @@ export default function AdminPage() {
     });
   };
 
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-violet-50/30 pt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+          <div className="flex items-center justify-center h-64">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-violet-600"></div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-violet-50/30">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-violet-50/30 pt-20">
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-xl border-b border-gray-200/50 sticky top-0 z-50">
+      <header className="bg-white/80 backdrop-blur-xl border-b border-gray-200/50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-6">
             <div>
               <h1 className="text-3xl font-light text-gray-900">
-                Blog{' '}
+                My{' '}
                 <span className="font-black bg-gradient-to-r from-violet-600 to-purple-600 bg-clip-text text-transparent">
-                  Administration
+                  Blog Posts
                 </span>
               </h1>
               <p className="text-gray-600 font-light mt-1">
@@ -192,9 +256,7 @@ export default function AdminPage() {
         {/* Stats */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <div className="bg-gradient-to-br from-violet-500 to-purple-600 text-white p-6 rounded-2xl shadow-lg">
-            <div className="text-3xl font-bold mb-2">
-              {filteredPosts.length}
-            </div>
+            <div className="text-3xl font-bold mb-2">{posts.length}</div>
             <div className="text-violet-100 font-medium">Total Posts</div>
           </div>
           <div className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white p-6 rounded-2xl shadow-lg">
@@ -209,7 +271,7 @@ export default function AdminPage() {
           </div>
           <div className="bg-gradient-to-br from-orange-500 to-red-600 text-white p-6 rounded-2xl shadow-lg">
             <div className="text-3xl font-bold mb-2">
-              {new Set(filteredPosts.map(p => p.user.name)).size}
+              {new Set(posts.map(p => p.user.name)).size}
             </div>
             <div className="text-orange-100 font-medium">Authors</div>
           </div>
@@ -296,7 +358,7 @@ export default function AdminPage() {
                           <Eye className="w-5 h-5" />
                         </Link>
                         <Link
-                          href={`/admin/edit/${post.id}`}
+                          href={`/blog/edit/${post.id}`}
                           className="p-2 text-violet-600 hover:bg-violet-100 rounded-xl transition-colors duration-200"
                           title="Edit Post"
                         >
@@ -304,10 +366,19 @@ export default function AdminPage() {
                         </Link>
                         <button
                           onClick={() => handleDelete(post.id)}
-                          className="p-2 text-red-600 hover:bg-red-100 rounded-xl transition-colors duration-200"
+                          disabled={deletingId === post.id}
+                          className={`p-2 text-red-600 hover:bg-red-100 rounded-xl transition-colors duration-200 ${
+                            deletingId === post.id
+                              ? 'opacity-50 cursor-not-allowed'
+                              : ''
+                          }`}
                           title="Delete Post"
                         >
-                          <Trash2 className="w-5 h-5" />
+                          {deletingId === post.id ? (
+                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-red-600"></div>
+                          ) : (
+                            <Trash2 className="w-5 h-5" />
+                          )}
                         </button>
                       </div>
                     </td>
@@ -323,15 +394,65 @@ export default function AdminPage() {
                 <Search className="w-12 h-12 text-violet-400" />
               </div>
               <h3 className="text-2xl font-light text-gray-900 mb-4">
-                No posts found
+                {posts.length === 0
+                  ? 'No posts found'
+                  : 'No posts match your search'}
               </h3>
               <p className="text-gray-600 font-light">
-                Try adjusting your search criteria or create a new post.
+                {posts.length === 0
+                  ? 'Create your first blog post to get started.'
+                  : 'Try adjusting your search criteria or create a new post.'}
               </p>
+              {posts.length === 0 && (
+                <Link
+                  href="/blog/create"
+                  className="inline-flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-violet-500 to-purple-600 text-white font-semibold rounded-2xl hover:shadow-xl transition-all duration-300 hover:scale-105 mt-6"
+                >
+                  <Plus className="w-5 h-5" />
+                  <span>Create Your First Post</span>
+                </Link>
+              )}
             </div>
           )}
         </div>
       </main>
+
+      {/* Delete Confirmation Dialog */}
+      <AlertDialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <AlertDialogContent className="sm:max-w-md">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-red-600">
+              Delete Blog Post
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-gray-600">
+              Are you sure you want to delete &quot;{postToDelete?.title}
+              &quot;? This action cannot be undone.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel
+              disabled={deletingId === postToDelete?.id}
+              className="bg-gray-100 hover:bg-gray-200 text-gray-700"
+            >
+              Cancel
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={confirmDelete}
+              disabled={deletingId === postToDelete?.id}
+              className="bg-red-600 hover:bg-red-700 text-white"
+            >
+              {deletingId === postToDelete?.id ? (
+                <div className="flex items-center space-x-2">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                  <span>Deleting...</span>
+                </div>
+              ) : (
+                'Delete'
+              )}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

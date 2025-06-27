@@ -2,6 +2,7 @@
 export interface BlogPost {
   id: string;
   userId: string;
+  views: number;
   title: string;
   excerpt: string;
   image: string;
