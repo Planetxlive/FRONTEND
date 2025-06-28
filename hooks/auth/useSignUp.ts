@@ -75,7 +75,6 @@ export function useSignUp() {
       console.log(result);
       if (result?.status === 'complete') {
         console.log(await getToken());
-        await setActive?.({ session: result.createdSessionId });
         console.log(location);
         const user = await createUser((await getToken()) || '', {
           longitude: location.longitude,
@@ -88,6 +87,7 @@ export function useSignUp() {
         dispatch(setUser(user));
         setIsOtpStage(false);
         setIsAuthComplete(true);
+        await setActive?.({ session: result.createdSessionId });
       } else {
         setSignUpError('Verification incomplete');
       }

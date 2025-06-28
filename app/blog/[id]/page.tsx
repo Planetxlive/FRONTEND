@@ -54,6 +54,7 @@ export default function BlogDetailPage() {
   const [newComment, setNewComment] = useState('');
 
   // Get all blogs from Redux store
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const allBlogs = useSelector((state: RootState) => state.blogs.blogs) || [];
 
   // Calculate related posts based on tag similarity

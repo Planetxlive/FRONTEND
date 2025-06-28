@@ -1,4 +1,4 @@
-import { User } from '@/app/store/features/user/types';
+import { User } from '@/types/user';
 import config from '@/lib/config';
 import axios from 'axios';
 

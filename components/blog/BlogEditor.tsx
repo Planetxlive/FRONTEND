@@ -40,7 +40,7 @@ export default function BlogEditor({
     location: '',
     contactInfo: '',
   });
-  const [content, setContent] = useState('');
+  const [content, setContent] = useState(initialData?.content || '');
   const [tagInput, setTagInput] = useState('');
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isPreview, setIsPreview] = useState(false);
