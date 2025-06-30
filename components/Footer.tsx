@@ -19,13 +19,23 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 
-export default function Footer() {
+interface FooterProps {
+  className?: string;
+  showScrollToTop?: boolean;
+}
+
+export default function Footer({
+  className = '',
+  showScrollToTop = true,
+}: FooterProps) {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
-    <footer className="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
+    <footer
+      className={`bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white ${className}`}
+    >
       {/* Main Footer Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -250,29 +260,6 @@ export default function Footer() {
             </div>
           </div>
         </div>
-
-        {/* Newsletter Subscription */}
-        <div className="mt-12 pt-8 border-t border-gray-700">
-          <div className="max-w-2xl mx-auto text-center">
-            <h4 className="text-xl font-semibold text-white mb-3">
-              Stay Updated with Latest Properties
-            </h4>
-            <p className="text-gray-300 mb-6">
-              Subscribe to our newsletter for exclusive property listings and
-              market insights
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
-              <input
-                type="email"
-                placeholder="Enter your email address"
-                className="flex-1 px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg focus:outline-none focus:border-emerald-400 text-white placeholder-gray-400"
-              />
-              <button className="px-6 py-3 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-lg transition-colors duration-200">
-                Subscribe
-              </button>
-            </div>
-          </div>
-        </div>
       </div>
 
       {/* Bottom Bar */}
@@ -319,13 +306,15 @@ export default function Footer() {
       </div>
 
       {/* Scroll to Top Button */}
-      <button
-        onClick={scrollToTop}
-        className="fixed bottom-6 right-6 w-12 h-12 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110 z-50"
-        aria-label="Scroll to top"
-      >
-        <ArrowUp className="w-6 h-6" />
-      </button>
+      {showScrollToTop && (
+        <button
+          onClick={scrollToTop}
+          className="fixed bottom-6 right-6 w-12 h-12 bg-emerald-500 hover:bg-emerald-600 text-white rounded-full shadow-lg flex items-center justify-center transition-all duration-200 hover:scale-110 z-50"
+          aria-label="Scroll to top"
+        >
+          <ArrowUp className="w-6 h-6" />
+        </button>
+      )}
     </footer>
   );
 }

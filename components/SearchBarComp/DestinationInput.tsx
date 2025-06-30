@@ -7,11 +7,15 @@ import { MapPin } from 'lucide-react';
 interface DestinationInputProps {
   value: string;
   onChange: (value: string) => void;
+  readOnly?: boolean;
+  placeholder?: string;
 }
 
 const DestinationInput: React.FC<DestinationInputProps> = ({
   value,
   onChange,
+  readOnly = false,
+  placeholder = 'Enter destination',
 }) => {
   const suggestions = [
     'New York, USA',
@@ -50,12 +54,13 @@ const DestinationInput: React.FC<DestinationInputProps> = ({
         <MapPin className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
         <Input
           type="text"
-          placeholder="Enter destination"
+          placeholder={placeholder}
           value={value}
           onChange={handleInputChange}
-          onFocus={() => setShowSuggestions(value.length > 0)}
+          onFocus={() => !readOnly && setShowSuggestions(value.length > 0)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
           className="pl-10 h-12 border-gray-300 focus:border-blue-500 focus:ring-blue-500"
+          readOnly={readOnly}
         />
       </div>
 
