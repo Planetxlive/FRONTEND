@@ -25,9 +25,12 @@ import { BlogPost } from '@/types/blog';
 // import postsData from '@/data/post.json';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/app/store/store';
 import getBlogById from '@/app/api/blogs/getBlogById';
+import toggleLike from '@/app/api/blogs/toggleLike';
+import useAuth from '@/hooks/auth/useAuth';
+import { refreshBlog } from '@/app/store/features/blogs/blogsSlice';
 
 export default function BlogDetailPage() {
   const params = useParams();
@@ -52,7 +55,9 @@ export default function BlogDetailPage() {
     { user: string; text: string; date: string }[]
   >([]);
   const [newComment, setNewComment] = useState('');
-
+  const { getToken } = useAuth()
+  const dispatch = useDispatch()
+ 
   // Get all blogs from Redux store
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const allBlogs = useSelector((state: RootState) => state.blogs.blogs) || [];
@@ -128,16 +133,18 @@ export default function BlogDetailPage() {
     return filtered;
   }, [post, allBlogs]);
 
+  const fetchData = async (id: string) => {
+    const foundPost = await getBlogById(id);
+    if (foundPost) {
+      setPost(foundPost);
+      dispatch(refreshBlog(foundPost))
+      const wordCount = foundPost.excerpt.split(' ').length * 10; // Simulated content length
+      setReadingTime(Math.ceil(wordCount / 200));
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      const foundPost = await getBlogById(params.id?.toString() || '');
-      if (foundPost) {
-        setPost(foundPost);
-        const wordCount = foundPost.excerpt.split(' ').length * 10; // Simulated content length
-        setReadingTime(Math.ceil(wordCount / 200));
-      }
-    };
-    fetchData();
+    fetchData(params.id?.toString() || '');
   }, [params.id]);
 
   // Handle text selection in the article
@@ -184,6 +191,12 @@ export default function BlogDetailPage() {
       document.removeEventListener('keyup', handleSelection);
     };
   }, []);
+
+  const handleLike = async () => {
+    const liked = await toggleLike((await getToken())!, params.id?.toString() || '')
+    await fetchData(params.id?.toString() || '');
+    setIsLiked(liked);
+  }
 
   const handleTextShare = (platform: string) => {
     if (!selectedText) return;
@@ -499,7 +512,7 @@ export default function BlogDetailPage() {
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-6">
               <button
-                onClick={() => setIsLiked(!isLiked)}
+                onClick={handleLike}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-full transition-all duration-200 ${
                   isLiked
                     ? 'bg-red-100 text-red-600'
@@ -507,7 +520,7 @@ export default function BlogDetailPage() {
                 }`}
               >
                 <Heart className={`w-5 h-5 ${isLiked ? 'fill-current' : ''}`} />
-                <span className="font-medium">{isLiked ? '124' : '123'}</span>
+                <span className="font-medium">{post.likes.length}</span>
               </button>
 
               <button
