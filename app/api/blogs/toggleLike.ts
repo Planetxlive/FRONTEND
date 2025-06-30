@@ -13,5 +13,8 @@ export default async function toggleLike(token: string, id: string) {
       },
     }
   );
-  return res.data.blog;
+
+  console.log(res.data);
+
+  return res.data.liked;
 }
