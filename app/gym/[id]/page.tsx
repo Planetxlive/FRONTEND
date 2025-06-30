@@ -18,7 +18,7 @@ import {
   X,
 } from 'lucide-react';
 import { Gym } from '@/types/gym';
-import gymsData from '@/data/gym.json';
+import fetchGymById from '@/app/api/gyms/fetchGymById';
 
 export default function GymDetailPage() {
   const params = useParams();
@@ -30,10 +30,15 @@ export default function GymDetailPage() {
   const [isFavorite, setIsFavorite] = useState(false);
 
   useEffect(() => {
-    const foundGym = gymsData.find((g: Gym) => g.id === params.id);
-    if (foundGym) {
-      setGym(foundGym);
-    }
+    // const foundGym = gymsData.find((g: Gym) => g.id === params.id);
+    // if (foundGym) {
+    //   setGym(foundGym);
+    // }
+    const fetchAll = async () => {
+      const gym = await fetchGymById(params.id?.toString() || '');
+      setGym(gym);
+    };
+    fetchAll();
   }, [params.id]);
 
   if (!gym) {
@@ -47,12 +52,16 @@ export default function GymDetailPage() {
     );
   }
 
-  const formatTiming = (timing: { [key: string]: string }) => {
+  const formatTiming = (timing: {
+    [key: string]: { open: string; close: string };
+  }) => {
     if (typeof timing === 'object') {
       return Object.entries(timing).map(([day, time]) => (
         <div key={day} className="flex justify-between">
           <span className="font-medium capitalize">{day}:</span>
-          <span>{time}</span>
+          <span>
+            {time.open} - {time.close}{' '}
+          </span>
         </div>
       ));
     }

@@ -11,7 +11,7 @@ export interface Gym {
   videos: string[];
   lockerFacility: boolean;
   timing: {
-    [key: string]: string;
+    [key: string]: { open: string; close: string };
   };
   categories: string[];
   rateCard?: string;
