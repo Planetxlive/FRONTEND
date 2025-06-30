@@ -26,7 +26,7 @@ export default function RootLayout({
           <body className={inter.className}>
             <Navbar />
             <main className="min-h-screen">{children}</main>
-            <Footer />
+            <Footer showScrollToTop={false} />
           </body>
         </html>
       </StoreProvider>
