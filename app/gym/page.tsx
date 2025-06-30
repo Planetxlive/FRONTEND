@@ -5,8 +5,8 @@ import { useSearchParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import {
-  Edit,
-  Trash2,
+  // Edit,
+  // Trash2,
   Eye,
   Search,
   MapPin,
@@ -28,7 +28,10 @@ import {
   Clock,
 } from 'lucide-react';
 import { Gym } from '@/types/gym';
-import gymsData from '@/data/gym.json';
+// import gymsData from '@/data/gym.json';
+import fetchAllGyms from '../api/gyms/fetchAllGyms';
+import { useDispatch } from 'react-redux';
+import { setGyms as setGymData } from '../store/features/gym/gymSlice';
 
 const GYMS_PER_PAGE = 12;
 
@@ -40,6 +43,7 @@ function GymPageContent() {
   const [sortBy, setSortBy] = useState('name');
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('list');
   const [showFilters, setShowFilters] = useState(false);
+  const dispatch = useDispatch();
 
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -61,8 +65,13 @@ function GymPageContent() {
   }, [searchParams]);
 
   useEffect(() => {
-    setGyms(gymsData);
-  }, []);
+    const updateData = async () => {
+      const data = await fetchAllGyms();
+      setGyms(data);
+      dispatch(setGymData(data));
+    };
+    updateData();
+  }, [dispatch]);
 
   // Update URL when filters change
   const updateURL = (updates: Record<string, string>) => {
@@ -150,13 +159,13 @@ function GymPageContent() {
     router.push(`/gym${newURL}`);
   };
 
-  const handleDelete = (id: string) => {
-    if (confirm('Are you sure you want to delete this gym?')) {
-      setGyms(
-        gyms.map(gym => (gym.id === id ? { ...gym, isDeleted: true } : gym))
-      );
-    }
-  };
+  // const handleDelete = (id: string) => {
+  //   if (confirm('Are you sure you want to delete this gym?')) {
+  //     setGyms(
+  //       gyms.map(gym => (gym.id === id ? { ...gym, isDeleted: true } : gym))
+  //     );
+  //   }
+  // };
 
   const resetFilters = () => {
     setSearchQuery('');
@@ -514,7 +523,7 @@ function GymPageContent() {
                             >
                               <Eye className="w-5 h-5" />
                             </Link>
-                            <Link
+                            {/* <Link
                               href={`/gym/edit/${gym.id}`}
                               className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-xl hover:bg-blue-500 hover:text-white transition-all duration-200"
                             >
@@ -525,7 +534,7 @@ function GymPageContent() {
                               className="w-12 h-12 bg-white/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-xl hover:bg-red-500 hover:text-white transition-all duration-200"
                             >
                               <Trash2 className="w-5 h-5" />
-                            </button>
+                            </button> */}
                           </div>
                         </div>
                       </div>
@@ -722,7 +731,7 @@ function GymPageContent() {
                             >
                               View Details
                             </Link>
-                            <Link
+                            {/* <Link
                               href={`/gym/edit/${gym.id}`}
                               className="p-3 text-blue-600 hover:bg-blue-100 rounded-xl transition-colors duration-200"
                             >
@@ -733,7 +742,7 @@ function GymPageContent() {
                               className="p-3 text-red-600 hover:bg-red-100 rounded-xl transition-colors duration-200"
                             >
                               <Trash2 className="w-5 h-5" />
-                            </button>
+                            </button> */}
                           </div>
                         </div>
                       </div>
