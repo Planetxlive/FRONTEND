@@ -100,7 +100,7 @@ export default function Navbar() {
                   isScrolled ? 'text-gray-900' : 'text-black'
                 }`}
               >
-                PROPWORLD
+                PlanetX
               </span>
             </div>
 
