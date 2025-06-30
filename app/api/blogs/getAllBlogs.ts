@@ -6,6 +6,6 @@ import axios from 'axios';
 export default async function getAllBlogs(): Promise<BlogPost[]> {
   const url = `${config.backendUrl}blog/`;
   const res = await axios.get(url);
-  console.log(res.data.data.blogs)
+  console.log(res.data.data.blogs);
   return res.data.data.blogs;
 }

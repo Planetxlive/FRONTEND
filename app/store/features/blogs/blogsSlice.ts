@@ -24,14 +24,14 @@ const blogsSlice = createSlice({
       console.log('Setting user blogs:', action.payload);
       state.userBlogs = action.payload;
     },
-    refreshBlog(state, action: PayloadAction<BlogPost>){
+    refreshBlog(state, action: PayloadAction<BlogPost>) {
       state.blogs =
         state.blogs?.filter(post => post.id !== action.payload.id) || [];
-      state.blogs.push(action.payload)
+      state.blogs.push(action.payload);
 
       state.userBlogs =
         state.userBlogs?.filter(post => post.id !== action.payload.id) || [];
-      state.userBlogs.push(action.payload)
+      state.userBlogs.push(action.payload);
     },
     clearBlogs(state) {
       state.blogs = null;

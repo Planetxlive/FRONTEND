@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo, FormEvent } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -31,6 +31,8 @@ import getBlogById from '@/app/api/blogs/getBlogById';
 import toggleLike from '@/app/api/blogs/toggleLike';
 import useAuth from '@/hooks/auth/useAuth';
 import { refreshBlog } from '@/app/store/features/blogs/blogsSlice';
+import postComment from '@/app/api/blogs/postComment';
+import fetchCommentsByBlogId from '@/app/api/blogs/fetchCommentsByBlogId';
 
 export default function BlogDetailPage() {
   const params = useParams();
@@ -52,12 +54,14 @@ export default function BlogDetailPage() {
   const [showTextShareMenu, setShowTextShareMenu] = useState(false);
   const [showComments, setShowComments] = useState(false);
   const [comments, setComments] = useState<
-    { user: string; text: string; date: string }[]
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    { userId: string; comment: string; updatedAt: string; user: any }[]
   >([]);
   const [newComment, setNewComment] = useState('');
-  const { getToken } = useAuth()
-  const dispatch = useDispatch()
- 
+  const { getToken } = useAuth();
+  const dispatch = useDispatch();
+  const user = useSelector((state: RootState) => state.user);
+
   // Get all blogs from Redux store
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const allBlogs = useSelector((state: RootState) => state.blogs.blogs) || [];
@@ -134,10 +138,20 @@ export default function BlogDetailPage() {
   }, [post, allBlogs]);
 
   const fetchData = async (id: string) => {
-    const foundPost = await getBlogById(id);
+    const foundPost = (await getBlogById(id)) as BlogPost;
+    const foundComments = await fetchCommentsByBlogId(id);
     if (foundPost) {
+      console.log('likes:');
+      console.log(foundPost.likes);
       setPost(foundPost);
-      dispatch(refreshBlog(foundPost))
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      if (
+        foundPost.likes.filter((likes: any) => likes.userId !== user.user?.id)
+          .length > 0
+      )
+        setIsLiked(true);
+      setComments(foundComments || []);
+      dispatch(refreshBlog(foundPost));
       const wordCount = foundPost.excerpt.split(' ').length * 10; // Simulated content length
       setReadingTime(Math.ceil(wordCount / 200));
     }
@@ -145,6 +159,7 @@ export default function BlogDetailPage() {
 
   useEffect(() => {
     fetchData(params.id?.toString() || '');
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [params.id]);
 
   // Handle text selection in the article
@@ -192,11 +207,26 @@ export default function BlogDetailPage() {
     };
   }, []);
 
+  const handleComment = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!newComment.trim()) return;
+    await postComment(
+      (await getToken())!,
+      params.id?.toString() || '',
+      newComment
+    );
+    await fetchData(params.id?.toString() || '');
+    setNewComment('');
+  };
+
   const handleLike = async () => {
-    const liked = await toggleLike((await getToken())!, params.id?.toString() || '')
+    const liked = await toggleLike(
+      (await getToken())!,
+      params.id?.toString() || ''
+    );
     await fetchData(params.id?.toString() || '');
     setIsLiked(liked);
-  }
+  };
 
   const handleTextShare = (platform: string) => {
     if (!selectedText) return;
@@ -548,19 +578,7 @@ export default function BlogDetailPage() {
             <div className="mt-8 p-6 bg-gray-50 rounded-xl shadow-inner">
               <h4 className="text-lg font-semibold mb-4">Comments</h4>
               <form
-                onSubmit={e => {
-                  e.preventDefault();
-                  if (!newComment.trim()) return;
-                  setComments([
-                    ...comments,
-                    {
-                      user: 'Anonymous', // Replace with actual user if available
-                      text: newComment,
-                      date: new Date().toISOString(),
-                    },
-                  ]);
-                  setNewComment('');
-                }}
+                onSubmit={handleComment}
                 className="flex flex-col gap-2 mb-6"
               >
                 <textarea
@@ -589,11 +607,11 @@ export default function BlogDetailPage() {
                     className="bg-white p-4 rounded-lg shadow flex flex-col"
                   >
                     <span className="font-medium text-gray-800">
-                      {comment.user}
+                      {comment.user.name}
                     </span>
-                    <span className="text-gray-600">{comment.text}</span>
+                    <span className="text-gray-600">{comment.comment}</span>
                     <span className="text-xs text-gray-400 mt-1">
-                      {new Date(comment.date).toLocaleString()}
+                      {new Date(comment.updatedAt).toLocaleString()}
                     </span>
                   </div>
                 ))}

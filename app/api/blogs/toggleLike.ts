@@ -14,7 +14,7 @@ export default async function toggleLike(token: string, id: string) {
     }
   );
 
-  console.log(res.data)
+  console.log(res.data);
 
   return res.data.liked;
 }
