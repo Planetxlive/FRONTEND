@@ -1,23 +1,51 @@
 'use client'
 
-import { Currency, Check, HelpCircle, ChevronDown, ChevronUp, Dumbbell, Shield, Zap } from 'lucide-react';
+import { Check, HelpCircle, Dumbbell, Shield, Zap } from 'lucide-react';
 import Script from 'next/script'
 import React from 'react'
 import { useState } from 'react'
 
 declare global {
     interface Window {
-        Razorpay: any;
+        Razorpay: {
+            new(options: RazorpayOptions): {
+                open(): void;
+            };
+        };
     }
 }
 
+interface RazorpayOptions {
+    key: string;
+    amount: number;
+    currency: string;
+    name: string;
+    description: string;
+    order_id: string;
+    handler: (response: RazorpayResponse) => void;
+    prefill: {
+        name: string;
+        email: string;
+        contact: string;
+    };
+    theme: {
+        color: string;
+    };
+}
+
+interface RazorpayResponse {
+    razorpay_payment_id: string;
+    razorpay_order_id: string;
+    razorpay_signature: string;
+}
+
 interface Package {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  isRecommended?: boolean;
-  features: string[];
+    id: string;
+    name: string;
+    description: string;
+    price: number;
+    isRecommended?: boolean;
+    features: string[];
 }
 
 const packages: Package[] = [
@@ -92,14 +120,18 @@ const PaymentPage = () => {
             });
             const data = await response.json();
 
-            const options = {
+            if (!process.env.NEXT_PUBLIC_KEY_ID) {
+                throw new Error('Razorpay key is not configured');
+            }
+
+            const options: RazorpayOptions = {
                 key: process.env.NEXT_PUBLIC_KEY_ID,
                 amount: pkg.price * 100,
                 currency: "INR",
                 name: "Hotel Booking",
                 description: `${pkg.name} Room Booking`,
                 order_id: data.orderId,
-                handler: function (response: any) {
+                handler: function (response: RazorpayResponse) {
                     console.log("Payment successful:", response);
                     alert(`Payment successful! Welcome to your ${pkg.name} stay!`);
                     setProcessingStates(prev => ({ ...prev, [pkg.id]: false }));
