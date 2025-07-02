@@ -194,11 +194,14 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
               </div>
 
               <div
-                onClick={onClose}
+                onClick={() => {
+                  onClose();
+                  router.push('/payments');
+                }}
                 className="flex items-center space-x-3 p-3 rounded-xl hover:bg-gray-50 cursor-pointer transition-colors"
               >
                 <CreditCard className="w-5 h-5 text-gray-600" />
-                <span className="text-gray-700">Payment History</span>
+                <span className="text-gray-700">Payments</span>
               </div>
 
               <div
